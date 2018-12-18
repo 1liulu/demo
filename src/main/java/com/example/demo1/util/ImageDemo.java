@@ -18,17 +18,24 @@ public class ImageDemo {
     private static final String ACCESS_KEY_ID = "AKLTyrBp0CWCQjeExPSearUboA";
     private static final String ACCESS_KEY_SECRET = "OHnFNgPZyz6c3jNM1yZFjKGI5kIfJk/rvaybM601nq3em/9GVIbg0MXnJueV9qNTXA==";
 
-    public static void main(String args[]) {
-    //create("test1.dcm");    //在本地目录生成test1.dcm.jpg图片文件
-    //    create2("F:\\test3.dcm");   //在电脑dicom文件夹下生成test1.dcm.jpg图片文件
-
-
-    }
-    public  void upload() throws Exception{
+    public static void main(String args[]) throws Exception {
+        //create("test1.dcm");    //在本地目录生成test1.dcm.jpg图片文件
+        //    create2("F:\\test3.dcm");   //在电脑dicom文件夹下生成test1.dcm.jpg图片文件
         Credential credential = new Credential(ACCESS_KEY_ID, ACCESS_KEY_SECRET);
         KS3Client client = new KS3Client(credential);
         String bucketName = "liulu1";
-        String publicPic  = "12.png";
+        String publicPic = "123.png";
+        File file = new File("F:\\work/demo/image/test1.png");
+        //上传不同访问权限的图片(MIME与图片格式相对应)
+        //client.putObject(bucketName, privatePic, file, "image/png", AccessControlList.PRIVATE);
+        client.putObject(bucketName, publicPic, file, "image/png", AccessControlList.READONLY);
+    }
+
+    public void upload() throws Exception {
+        Credential credential = new Credential(ACCESS_KEY_ID, ACCESS_KEY_SECRET);
+        KS3Client client = new KS3Client(credential);
+        String bucketName = "liulu1";
+        String publicPic = "123.png";
         File file = new File("F:\\work/demo/image/test1.png");
         //上传不同访问权限的图片(MIME与图片格式相对应)
         //client.putObject(bucketName, privatePic, file, "image/png", AccessControlList.PRIVATE);

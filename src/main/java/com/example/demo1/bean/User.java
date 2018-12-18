@@ -1,40 +1,85 @@
 package com.example.demo1.bean;
 
 public class User {
-    private int user_id;
-    private String u_name;
-    private String u_password;
-    private String type_id;
+    private int id;
+    private String uid;
+    private String phone;
+    private int status;
+    private String deptid;
+    private String openid;
+    private String name;
+    private int sex;
+    private int age;
 
-    public int getUser_id() {
-        return user_id;
+    public int getId() {
+        return id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getU_name() {
-        return u_name;
+    public String getUid() {
+        return uid;
     }
 
-    public void setU_name(String u_name) {
-        this.u_name = u_name;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public String getU_password() {
-        return u_password;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setU_password(String u_password) {
-        this.u_password = u_password;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getType_id() {
-        return type_id;
+    public int getStatus() {
+        return status;
     }
 
-    public void setType_id(String type_id) {
-        this.type_id = type_id;
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getDeptid() {
+        return deptid;
+    }
+
+    public void setDeptid(String deptid) {
+        this.deptid = deptid;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
