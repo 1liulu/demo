@@ -6,7 +6,5 @@
    <mapper namespace="com.example.demo1.mapper.UserMapper">
    
 
-	<select id="selectuser" parameterType="com.example.demo1.bean.User" resultType="com.example.demo1.bean.User">
-		SELECT * FROM user WHERE u_name=#{u_name} AND u_password=#{u_password}
-	</select>
+
    </mapper>

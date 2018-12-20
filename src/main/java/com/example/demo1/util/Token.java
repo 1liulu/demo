@@ -8,6 +8,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.demo1.bean.Account;
 import com.example.demo1.bean.User;
 
 import java.io.UnsupportedEncodingException;
@@ -89,7 +90,7 @@ public class Token {
         return timeout;
     }
 
-    public static User getDataByTokenSubject(String subject) {
-      return   JSON.toJavaObject(JSON.parseObject(subject).getJSONObject("user"),User.class)      ;
+    public static Account getDataByTokenSubject(String subject) {
+      return   JSON.toJavaObject(JSON.parseObject(subject).getJSONObject("account"),Account.class)      ;
     }
 }

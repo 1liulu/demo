@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/css/font.css">
+    <link rel="stylesheet" href="../../static/css/weadmin.css">
+    <link rel="stylesheet" href="Training.css">
+    <style>
+        #tbody img {
+            width: 16px;
+            height: 20px;
+        }
+
+        .Training {
+            height: 92%;
+        }
+
+        .bottom-span {
+            display: block;
+            text-align: center;
+            width: 30%;
+            margin-top: 1%;
+            position: fixed;
+            bottom: 5px;
+            left: 0;
+            right: 0;
+            margin: auto
+        }
+        .section-two-div-bg{
+            background-color: #ddd;
+        }
+        .Training-top>div{
+            float: left;
+            background-color: #fff;
+            box-shadow: 0 1px 5px 0 rgba(0,0,0,.2);
+            width: 49.5%;
+            height: 100%;
+        }
+        .Training-top>div>div{
+            float: left;
+        }
+        .layui-table td, .layui-table th{
+            text-align: center;
+        }
+        .section-two-div1{
+            border-radius: 10px;
+            cursor: pointer;
+            overflow: hidden;
+            margin-top: 7px;
+            text-align: center;
+            float: left;
+            position: relative;
+            box-shadow: 0 1px 5px 0 rgba(0,0,0,.2);
+            height: 20%;
+            margin-left: 2%;
+            font-size: 14px;
+            width: 30%;
+            padding: 1% 0;
+        }
+        .section-two-div1 img{
+            width: 40px;
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom:0;
+            right: 0;
+            margin: auto;
+            height: 40px;
+        }
+        .section-two-div1 div:nth-last-child(2)
+        {
+            position: absolute;
+            transition: all linear 0.1s;
+            width: 100%;
+            height: 100%;
+            left: 0;
+        }
+        .section-two-div1 div:nth-last-child(1)
+        {
+            top: 10px;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: all linear 0.1s;
+            color: #000;
+            left: -100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Training">
+        <div class="Training-top">
+            <div style="margin-right: 1%">
+                <div class="Training-top-2 one-cc" style="width: 30%">
+                    <div class="top-2-left" style="width: 100%">
+                        <div class="section-two-div" data="10">
+                            <div><img src="img/3000米.png" alt=""></div>
+                            <div>3000米</div>
+                        </div>
+                        <div class="section-two-div" data="1">
+                            <div><img src="img/单杠卷身上.png" alt=""></div>
+                            <div>单杠卷身上</div>
+                        </div>
+                        <div class="section-two-div" data="0">
+                            <div><img src="img/双杠臂屈伸.png" alt=""></div>
+                            <div>双杠臂屈伸</div>
+                        </div>
+                        <div class="section-two-div" data="5">
+                            <div><img src="img/搬运重物折返跑.png" alt=""></div>
+                            <div>搬运重物折返跑</div>
+                        </div>
+                        <div class="section-two-div" data="11">
+                            <div><img src="img/绳索攀爬.png" alt=""></div>
+                            <div>绳索攀爬</div>
+                        </div>
+                        <div class="section-two-div" data="2">
+                            <div><img src="img/俯卧撑.png" alt=""></div>
+                            <div>俯卧撑</div>
+                        </div>
+                        <div class="section-two-div" data="8">
+                            <div><img src="img/背负空气呼吸器5000米跑.png" alt=""></div>
+                            <div>背负空气呼吸器5000米跑</div>
+                        </div>
+                        <div class="section-two-div" data="9">
+                            <div><img src="img/400米疏散物资救人.png" alt=""></div>
+                            <div>400米疏散物资救人</div>
+                        </div>
+                        <div class="section-two-div" data="3">
+                            <div><img src="img/仰卧起坐.png" alt=""></div>
+                            <div>仰卧起坐</div>
+                        </div>
+                        <div class="section-two-div" data="4">
+                            <div><img src="img/100米负重跑.png" alt=""></div>
+                            <div>100米负重跑</div>
+                        </div>
+                        <div class="section-two-div" data="6">
+                            <div><img src="img/60米肩梯跑.png" alt=""></div>
+                            <div>60米肩梯跑</div>
+                        </div>
+                        <div class="section-two-div" data="7">
+                            <div><img src="img/负重攀爬10层楼.png" alt=""></div>
+                            <div>负重攀爬10层楼</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Training-top-1" style="width: 69%">
+                    <div id="Training-top-1"></div>
+                </div>
+            </div>
+            <div>
+                <div class="Training-top-2 two-cc" style="width: 30%">
+                    <div class="top-2-right" style="width: 100%">
+                        <div class="section-two-div1" mydata="1" data="0">
+                            <div><img src="img/百米障碍救助操.png" alt=""></div>
+                            <div>百米障碍救助操</div>
+                        </div>
+                        <div class="section-two-div1" mydata="2" data="0">
+                            <div><img src="img/初战快速出水控火操.png" alt=""></div>
+                            <div>初战快速出水控火操</div>
+                        </div>
+                        <div class="section-two-div1" mydata="3" data="0">
+                            <div><img src="img/两车三枪操.png" alt=""></div>
+                            <div>两车三枪操</div>
+                        </div>
+                        <div class="section-two-div1" mydata="4" data="0">
+                            <div><img src="img/楼层火灾救人操.png" alt=""></div>
+                            <div>楼层火灾救人操</div>
+                        </div>
+                        <div class="section-two-div1" mydata="5" data="0">
+                            <div><img src="img/楼层火灾内攻操.png" alt=""></div>
+                            <div>楼层火灾内攻操</div>
+                        </div>
+                        <div class="section-two-div1" mydata="6" data="0">
+                            <div><img src="img/攀登15米金属拉梯操.png" alt=""></div>
+                            <div>攀登15米金属拉梯操</div>
+                        </div>
+                        <div class="section-two-div1" mydata="7" data="0">
+                            <div><img src="img/枪炮协同灭火操.png" alt=""></div>
+                            <div>枪炮协同灭火操</div>
+                        </div>
+                        <div class="section-two-div1" mydata="8" data="0">
+                            <div><img src="img/纵深灭火救人操.png" alt=""></div>
+                            <div>纵深灭火救人操</div>
+                        </div>
+                        <div class="section-two-div" data="0">
+                            <div><img src="img/jh.png" style="width: 40px;height: 40px" alt=""></div>
+                            <div>添加</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Training-top-3" style="width: 70%">
+                    <table class="layui-table" style="text-align: center">
+                        <thead>
+                            <tr>
+                                <th style="min-width: 150px;text-align: center">项目</th>
+                                <th style="min-width: 90px;">训练次数</th>
+                                <th style="min-width: 90px;">上次训练</th>
+                                <th style="min-width: 60px;">同比</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            <tr>
+                                <td>百米障碍救助操</td>
+                                <td>5</td>
+                                <td>2天前</td>
+
+                                <td><img src="../Statistics/img/j1.gif" alt=""></td>
+                            </tr>
+
+                            <tr>
+                                <td>初战快速出水控火操</td>
+                                <td>2</td>
+                                <td>6天前</td>
+
+                                <td><img src="../Statistics/img/j2.gif" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>两车三枪操</td>
+                                <td>2</td>
+                                <td>8天前</td>
+
+                                <td><img src="../Statistics/img/j2.gif" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>楼层火灾救人操</td>
+                                <td>4</td>
+                                <td>3天前</td>
+
+                                <td><img src="../Statistics/img/j1.gif" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>楼层火灾内攻操</td>
+                                <td>2</td>
+                                <td>6天前</td>
+
+                                <td><img src="../Statistics/img/j2.gif" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>攀登15米金属拉梯操</td>
+                                <td>4</td>
+                                <td>3天前</td>
+
+                                <td><img src="../Statistics/img/j1.gif" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>枪炮协同灭火操</td>
+                                <td>5</td>
+                                <td>4天前</td>
+
+                                <td><img src="../Statistics/img/j1.gif" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>纵深灭火救人操</td>
+                                <td>3</td>
+                                <td>1天前</td>
+
+                                <td><img src="../Statistics/img/j1.gif" alt=""></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--<div class="Training-top-4">-->
+            <!--<div id="Training-top-4"></div>-->
+            <!--</div>-->
+        </div>
+        <div class="Training-bottom" style="overflow: auto;width: 100%;box-shadow: 0 1px 5px 0 rgba(0,0,0,.2);">
+            <table class="layui-table">
+                <thead>
+                    <!--colspan="2"-->
+                    <tr>
+                        <th rowspan="2" style="min-width: 105px; text-align: center">日期</th>
+                        <th rowspan="2" style="min-width: 60px; text-align: center">星期</th>
+                        <th rowspan="2" style="min-width: 140px; text-align: center">早操</th>
+                        <th colspan="3" style="min-width: 400px; text-align: center">上午</th>
+                        <th colspan="3" style="min-width: 400px; text-align: center">中午</th>
+                        <th colspan="2" style="min-width: 300px; text-align: center">晚上</th>
+                        <th rowspan="2" style="min-width: 100px; text-align: center">值班员</th>
+                    </tr>
+                    <tr>
+                        <th style="min-width: 200px; text-align: center">内容</th>
+                        <th style="min-width: 70px; text-align: center">课时</th>
+                        <th style="min-width: 100px; text-align: center">授课人</th>
+                        <th style="min-width: 200px; text-align: center">内容</th>
+                        <th style="min-width: 70px; text-align: center">课时</th>
+                        <th style="min-width: 100px; text-align: center">授课人</th>
+                        <th style="min-width: 160px; text-align: center">内容</th>
+                        <th style="min-width: 120px; text-align: center">授课人</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2018-11-26</td>
+                        <td>一</td>
+                        <td>
+                            队列训练、
+                            警容风纪检查
+                        </td>
+                        <td>
+                            内务卫生检查、条令学习、队列训练
+                        </td>
+                        <td>
+                            2
+                        </td>
+                        <td>
+                            周洋
+                        </td>
+                        <td>
+                            第一二课时：单杠卷身上、3000米跑<br>
+                            课外活动
+
+                        </td>
+                        <td>
+                            2
+                        </td>
+                        <td>
+                            周洋
+                        </td>
+                        <td>
+                            体能训练、晚点名
+                        </td>
+                        <td>
+                            周洋
+                        </td>
+                        <td>
+                            梁实秋
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2018-11-27</td>
+                        <td>二</td>
+                        <td>
+                            3000米、
+                            单腿深蹲
+
+                        </td>
+                        <td>
+                            第一课时：攀登15米金属拉梯操<br>
+                            第二三课时：熟悉演练
+
+                        </td>
+                        <td>
+                            3
+                        </td>
+                        <td>
+                            周洋
+                        </td>
+                        <td>
+                            第一二课时：思想政治教育
+                        </td>
+                        <td>
+                            2
+                        </td>
+                        <td>
+                            周洋
+                        </td>
+                        <td>
+                            台帐资料检查、
+                            上周火场战评、
+                            晚点名
+                        </td>
+                        <td>
+                            周洋
+                        </td>
+                        <td>
+                            梁实秋
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2018-11-28</td>
+                        <td>三</td>
+                        <td>
+                            3000米、
+                            单双杠
+                        </td>
+                        <td>
+                            第一课时：纵深灭火救人操<br>
+                            第二三课时：背负空气呼吸器<br>5000米跑
+
+                        </td>
+                        <td>
+                            3
+                        </td>
+                        <td>
+                            周洋
+                        </td>
+                        <td>
+                            第一二课时：搬运重物折返跑、单杠卷身上
+                        </td>
+                        <td>
+                            2
+                        </td>
+                        <td>
+                            周洋
+                        </td>
+                        <td>
+                            看新闻、业务理论学习危险
+                            化学品常识、安全教育
+                        </td>
+                        <td>
+                            周洋
+                        </td>
+                        <td>
+                            梁实秋
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2018-11-29</td>
+                        <td>四</td>
+                        <td>
+                            3000米、
+                            俯卧撑
+                        </td>
+                        <td>
+                            第一课时：枪炮协同灭火操<br>
+                            第二三课时：枪炮协同灭火操
+                        </td>
+                        <td>
+                            3
+                        </td>
+                        <td>
+                            薛云飞
+                        </td>
+                        <td>
+                            第一课时：周考核 <br>
+                            第二课时：业务理论学习
+                            学习危险化学品常识
+                        </td>
+                        <td>
+                            2
+                        </td>
+                        <td>
+                            薛云飞
+                        </td>
+                        <td>
+                            体能训练、看电影、干部授课
+                        </td>
+                        <td>
+                            薛云飞
+                        </td>
+                        <td>
+                            梁实秋
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2018-11-30</td>
+                        <td>五</td>
+                        <td>
+                            3000米、
+                            仰卧起坐
+                        </td>
+                        <td>
+                            第一课时:车场日<br>
+                            第二三课时:演练日
+                        </td>
+                        <td>
+                            3
+                        </td>
+                        <td>
+                            薛云飞
+                        </td>
+                        <td>
+                            第一课时:党员活动日<br>
+                            第二课时:思想政治教育
+                        </td>
+                        <td>
+                            2
+                        </td>
+                        <td>
+                            薛云飞
+                        </td>
+                        <td>
+                            看电影、文体活动、晚点名
+                        </td>
+                        <td>
+                            薛云飞
+                        </td>
+                        <td>
+                            梁实秋
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>2018-12-1</td>
+                        <td>六</td>
+                        <td>
+                            整理内务
+                        </td>
+                        <td>
+                            读书读报
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            金烁
+                        </td>
+                        <td>
+                            自由活动
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            金烁
+                        </td>
+                        <td>
+                            看新闻、自由活动、晚点名
+                        </td>
+                        <td>
+                            金烁
+                        </td>
+                        <td>
+                            梁实秋
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2018-12-2</td>
+                        <td>日</td>
+                        <td>
+                            整理内务
+                        </td>
+                        <td>
+                            自由活动
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            金烁
+                        </td>
+                        <td>
+                            整理内务、打扫卫 生、安全检查、恢复正课安全隐患检查
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            金烁
+                        </td>
+                        <td>
+                            班务会、会晚点名
+                        </td>
+                        <td>
+                            金烁
+                        </td>
+                        <td>
+                            梁实秋
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bottom-span">
+            <button class="layui-btn">取消</button>
+            <button class="layui-btn">完成</button>
+            <button class="layui-btn">导出</button>
+        </div>
+
+        <!--<span class="bottom-span">-->
+        <!--<div class="layui-btn">取消</div>-->
+        <!--<div class="layui-btn" style="margin-left: 100px;">完成</div>-->
+        <!--<div class="layui-btn" style="margin-left: 150px;">导出</div>-->
+        <!--</span>-->
+        <span class="clear"></span>
+    </div>
+    <script type="text/javascript" src="../../lib/layui/layui.all.js" charset="utf-8"></script>
+    <script src="../../lib/layui/echart.js"></script>
+    <script src="../../static/js/jquery-3.3.1.min.js"></script>
+    <script>
+        $(".section-two-div").hover(function () {
+            $(this).find('div').eq(0).css('left', '100%');
+            $(this).find('div').eq(1).css('left', '0');
+        }, function () {
+            $(this).find('div').eq(0).css('left', '0');
+            $(this).find('div').eq(1).css('left', '-100%');
+        });
+        $(".section-two-div1").hover(function () {
+            $(this).find('div').eq(0).css('left', '100%');
+            $(this).find('div').eq(1).css('left', '0');
+        }, function () {
+            $(this).find('div').eq(0).css('left', '0');
+            $(this).find('div').eq(1).css('left', '-100%');
+        });
+    </script>
+    <script>
+        var akk = [];
+        for (var i = 1; i < 13; i++) {
+            var gg = [];
+            for (var ll = 0; ll < 5; ll++) {
+                gg.push(Math.round(Math.random() * 30000) + 10000)
+            }
+            var obj = {
+                value: gg,
+                name: i + '月份'
+            }
+            akk.push(obj)
+        }
+        var daList = [{
+                value: [4300, 10000, 28000, 35000, 50000],
+                name: '8月份'
+            },
+            {
+                value: [5000, 14000, 28000, 31000, 42000],
+                name: '9月份'
+            }
+        ];
+        // var arr=e;
+        var option = {
+            title: {
+                text: '基本体能',
+                top: 0
+                // left: 'center',
+                // bottom:0
+            },
+            // legend: {
+            //     data: ['8月份', '9月份']
+            // },
+            radar: {
+                // shape: 'circle',
+                name: {
+                    textStyle: {
+                        color: '#fff',
+                        backgroundColor: '#999',
+                        borderRadius: 3,
+                        padding: [3, 5]
+                    }
+                },
+                // radius: 100,
+                indicator: [{
+                        name: '力量',
+                        max: 100
+                    },
+                    {
+                        name: '速度',
+                        max: 100
+                    },
+                    {
+                        name: '耐力',
+                        max: 100
+                    },
+                    {
+                        name: '技巧',
+                        max: 100
+                    },
+                    {
+                        name: 'BMI',
+                        max: 100
+                    }
+                ]
+            },
+            series: [{
+                name: '预算 vs 开销（Budget vs spending）',
+                type: 'radar',
+                // areaStyle: {normal: {}},
+                data: [{
+                        value: ['0', '0', '0', '0', '0'],
+                        itemStyle: {
+                            normal: {
+                                color: 'red'
+
+                            }
+                        },
+                    },
+                    {
+                        value: ['35', '35', '30', '40', '40'],
+                        name: '8月份',
+                        itemStyle: {
+                            normal: {
+                                color: 'blue'
+
+                            }
+                        }
+                    }
+
+                ]
+            }]
+        };
+        var myChart = echarts.init(document.getElementById('Training-top-1'));
+        myChart.setOption({
+            series: [{
+                type: 'map',
+                map: 'china'
+            }]
+        });
+        myChart.setOption(option);
+        var s = 0;
+        $('.one-cc .section-two-div').click(function () {
+            // 力量速度耐力技巧BMI
+            var llo = [
+                //双杠0
+                ['70', '45', '30', '40', '40'],
+                //单杠 1
+                ['40', '35', '45', '65', '40'],
+                // 俯卧撑 2
+                ['70', '35', '30', '40', '50'],
+                //仰卧起坐 3
+                ['35', '35', '50', '40', '60'],
+                //100米负重跑 4
+                ['55', '45', '45', '80', '40'],
+                // 搬运重物折返跑 5
+                ['70', '35', '50', '40', '40'],
+                //60米肩梯 6
+                ['35', '70', '30', '40', '45'],
+                //攀登十楼 7
+                ['35', '60', '30', '45', '40'],
+                //背负空气呼吸器5000米跑 8
+                ['35', '70', '65', '40', '45'],
+                // 400米疏散物质救人 9
+                ['45', '35', '65', '40', '40'],
+                // 3000米跑 10
+                ['35', '50', '65', '40', '40'],
+                //攀登四层楼(爬绳) 11
+                ['45', '35', '70', '50', '40'],
+            ];
+            if ($(this).attr('data-w') == undefined || $(this).attr('data-w') == 0) {
+                $(this).attr('data-w', 1);
+                $(this).addClass('section-two-div-bg')
+            } else {
+                $(this).attr('data-w', 0);
+                $(this).removeClass('section-two-div-bg')
+            }
+            var sas = $('.one-cc .section-two-div-bg');
+            var ardd = [];
+            for (var i = 0; i < sas.length; i++) {
+                ardd.push(sas[i].getAttribute('data'))
+            }
+            var ssarr = [0, 0, 0, 0, 0];
+            for (var ii = 0; ii < ardd.length; ii++) {
+                var aa = llo[ardd[ii]];
+                aa.forEach(function (item, index) {
+                    ssarr[index] += Number(item);
+                })
+            }
+            ssarr.forEach(function (item, index) {
+                ssarr[index] = item / ardd.length
+            })
+            var ss = Number($(this).attr('data'));
+
+            option.series[0].data[0] = ssarr;
+            myChart.hideLoading();
+            myChart.setOption(option);
+
+        })
+        $(".two-cc .section-two-div").click(function () {
+            if ($(this).attr('data') == undefined || $(this).attr('data') == 0) {
+                console.dir($(this))
+                $(this).attr('data', 1);
+                $(this).css('backgroundColor', '#ddd')
+            } else {
+                $(this).attr('data', 0);
+                $(this).css('backgroundColor', '#fff')
+            }
+
+        })
+        $(".two-cc .section-two-div1").click(function () {
+            var list = $("#tbody").children("tr");
+            var i = $(this).attr('mydata') - 1;
+            for (var z = 0; z < list.length; z++) {
+                console.dir(list[z])
+                if (i == z) {
+                    if (list[z].data == undefined || list[z].data == 0) {
+                        list[z].data = 1;
+                        list[z].style.backgroundColor = '#ddd';
+                    } else {
+                        list[z].data = 0;
+                        list[z].style.backgroundColor = '#fff';
+                    }
+                    console.dir(list[z].data)
+                }
+            }
+            if ($(this).attr('data') == undefined || $(this).attr('data') == 0) {
+                $(this).attr('data', 1);
+                $(this).css('backgroundColor', '#ddd')
+            } else {
+                $(this).attr('data', 0);
+                $(this).css('backgroundColor', '#fff')
+            }
+
+        })
+    </script>
+    <script>
+        tneng(daList)
+        function tneng(e) {
+
+        }
+
+        $(".layui-btn").click(function () {
+            var num = $(this).index();
+            if (num == 0 || num == 1) {
+                window.location.href = 'Training.html';
+            }
+        })
+    </script>
+
+</body>
+
+</html>

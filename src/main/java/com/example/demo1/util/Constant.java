@@ -8,84 +8,13 @@ import java.util.function.Predicate;
 public class Constant {
 
 
-    public final static String ZERO = "0";
 
-
-    public final static String Redis_ScoreSumary = "Redis_ScoreSumary";
-
-    public final static String SCORE_WEEK = "week";
-
-    public final static String SCORE_MONTH = "month";
-
-    public final static String SCORE_QUARTER = "quarter";
-
-
-
-    public final static String ABNORMAL_MONTH = "abnormal_month";
-
-    public final static String ABNORMAL_TYPE_MONTH = "abnormal_type_month";
-
-    public final static String HEARTRATE_MONTH = "heartrate_month";
-
-
-
-
-
-
-
-
-
-
-    public final static String SYS_TRAINID = "999";
-
-
-    public  final  static String SEX_MAN ="1";
-
-    public final static Integer TimeType = 2;
-
+    //token生成异常
     public final static String GENERATE_TOKEN_ERROR = "-1";
 
-    // xf_person.position:官兵职位-指挥官
-    public final static String PERSON_POSITION_COMMANDER = "766";
 
-    // xf_person.status:官兵状态-备勤
-    public final static String PERSON_STATUS_RELIEF = "566";
 
-    // xf_clxx.clzt:车辆状态-备勤
-    public final static String CLXX_CLZT_RELIEF = "800";
 
-    // 组织类型
-    //总队
-    public static final int ZONGDUI = 1;
-    //支队
-    public static final int ZHIDUI = 2;
-    //大队
-    public static final int DADUI = 3;
-    //中队
-    public static final int ZHONGDUI = 4;
-
-    //状态值
-    public static final String STATUS_ANLE = "0";
-    public static final String STATUS_ENANLE = "1";
-
-    //今日警情
-    //选择日期
-    public static final String TYPE_DATE = "2";
-    //本周
-    public static final String TYPE_WEEK = "week";
-    //本月
-    public static final String TYPE_MONTH = "month";
-    //本年
-    public static final String TYPE_YEAR = "year";
-    //山东省编码
-    public static final String SD_CODE = "370000.";
-    //总队的orgid
-    public static final String ORG_ID = "1";
-
-    //山东省区域代码
-    public static final String SHANDONG_CODE = "370000";
-    //地图等级
-    public static final String SECOND_LEVEL = "2";
     /**
      * 学习资料训练指导
      */

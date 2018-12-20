@@ -1,0 +1,882 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>医众影像</title>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1, minimal-ui">
+    <link href="__TMPL__/public/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="__TMPL__/public/lib/jquery-ui.min.css" rel="stylesheet">
+    <link href="__TMPL__/public/css/op2.css?v=2" rel="stylesheet">
+    <link href="__TMPL__/public/css/newiconfont/iconfont.css" rel="stylesheet">
+    <link href="__TMPL__/public/css/layout.css" rel="stylesheet">
+    <link href="__TMPL__/public/css/dialogPolyfill.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+        }
+
+        #footer_tool {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            z-index: 99;
+        }
+
+        #footer_tool {
+            bottom: 0;
+            background-color: #000;
+        }
+
+        .tool {
+            display: inline-block;
+            text-align: center;
+            color: #fff;
+            cursor: pointer;
+            padding: 10px 22px;
+            position: relative;
+        }
+
+        .tool.selected {
+            color: #32aae2;
+            background-color: #EDF1F5;
+        }
+
+        .tool.selected .tool-icon, .tool.selected .text {
+            color: #777;
+        }
+
+        .tool.red {
+            color: red;
+        }
+
+        .tool.red .tool-icon, .tool.red .text {
+            color: red;
+        }
+
+        .tool-icon {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            color: #5a5a5a;
+        }
+
+        .tool-icon .iconfont {
+            display: block;
+            font-size: 32px;
+        }
+
+        .tool .text {
+            display: block;
+            height: 20px;
+            line-height: 20px;
+            margin-top: 2px;
+            font-size: 14px;
+        }
+
+        #seriesPane {
+            position: absolute;
+            width: 170px;
+            height: 1500px;
+            background-color: #454545;
+            border-right: 2px solid #777;
+            border-bottom: 2px solid #777;
+            left: 0px;
+            top: 0px;
+        }
+
+        .arrow-up {
+            width: 0px;
+            height: 0px;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid #5a5a5a;
+            /*以下属性可以是IE5兼容*/
+            font-size: 0px;
+            line-height: 0px;
+        }
+
+        .measure-menu {
+            position: absolute;
+            bottom: 76px;
+            left: 674px;
+            z-index: 101;
+            background-color: #EDF1F5;
+            display: none;
+        }
+
+        .measure-menu ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .measure-menu ul li {
+            margin: 0;
+            padding: 0;
+            color: #5a5a5a;
+            list-style: none;
+            position: relative;
+            height: 56px;
+            width: 138px;
+            cursor: pointer;
+        }
+
+        .measure-menu ul li:hover {
+            background-color: #31ACE2;
+            color: #fff;
+        }
+
+        .measure-menu ul li:hover .iconfont {
+            color: #fff;
+        }
+
+        .measure-menu ul li .iconfont {
+            font-size: 32px;
+            position: absolute;
+            left: 25px;
+            top: 6px;
+        }
+
+        .measure-menu ul li .text {
+            font-size: 14px;
+            position: absolute;
+            left: 82px;
+            top: 19px;
+        }
+
+    </style>
+    <style>
+        #seriesPane {
+            overflow: auto;
+        }
+
+        #seriesPane .seriesPart {
+            border-bottom: 2px solid #777;
+            border-top: 2px solid #777;
+            background: #000;
+            text-align: center;
+            position: relative;
+        }
+
+        #seriesPane .seriesPart .count {
+            display: inline-block;
+            font-size: 8px;
+            padding: 0px 2px;
+            color: #EDF0F5;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            opacity: 0.7;
+            z-index: 10;
+            background: #808080;
+            width: 18px;
+            height: 14px;
+            line-height: 14px;
+        }
+
+        #seriesPane .seriesPart.active .count {
+            background: #30ADE2;
+            color: #fff;
+            opacity: 1;
+        }
+
+        #seriesPane .seriesPart.active {
+            border: 1px solid #30ADE2;
+        }
+
+        #seriesPane .seriesPart.active .seriesDesc {
+            background: #4A4A4A;
+            color: #fff;
+            opacity: 1;
+        }
+
+        #seriesPane .seriesDesc {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 22px;
+            line-height: 22px;
+            color: #EDF0F5;
+            text-align: center;
+            white-space: nowrap;
+            font-size: 8px;
+            opacity: 0.7;
+            z-index: 10;
+            background: #808080;
+        }
+
+        #seriesPane img {
+            width: 118px;
+        }
+
+        #wrap {
+            position: absolute;
+            left: 184px;
+            top: 2px;
+        }
+    </style>
+    <style type="text/css">
+        #bg {
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+            -moz-opacity: 0.7;
+            opacity: .70;
+            filter: alpha(opacity=70);
+        }
+
+        #cross-dlg {
+            display: none;
+            position: absolute;
+            top: 25%;
+            left: 22%;
+            width: 53%;
+            height: 49%;
+            padding: 8px;
+            border: 8px solid #E8E9F7;
+            background-color: white;
+            z-index: 1002;
+            overflow: auto;
+        }
+    </style>
+    <style>
+        #topPromptInfo {
+            position: absolute;
+            width: 100%;
+            top: 50px;
+            left: 0;
+            text-align: center;
+            padding: 8px;
+            z-index: 9999;
+            background: #000;
+            opacity: .7;
+            color: red;
+            font-size: 26px;
+            display: none;
+        }
+    </style>
+    <style>
+        body {
+            background-color: #000;
+        }
+
+        .wwwc-ctrl {
+            width: 86px;
+            padding: 4px;
+            border: 1px solid #fff;
+            background-color: transparent;
+            color: white;
+            text-align: center;
+            margin: 10px 0;
+            cursor: pointer;
+            font-size: 15px;;
+        }
+
+        .mys:before {
+            color: #777 !important;
+        }
+    </style>
+</head>
+
+<body>
+<div id="bg"></div>
+<div id="cross-dlg">
+    <div style="text-align: right;">
+        <input id="btnclose" type="button" value="关闭" onclick="hideCrossWrapper();"/>
+    </div>
+    <div style="text-align: center;">
+        <div style="margin: 20px 0;font-size: 20px;">打开微信扫一扫，立即穿越到手机上看影像</div>
+        <div>
+            <img width="220"
+                 src="http://qr.liantu.com/api.php?text=http://dr1jia1.com/dicom/%3Fsuid=1.2.826.0.1.3680043.2.461.10084994.452087012%26org=103%26f=app">
+        </div>
+    </div>
+</div>
+<div>
+    <div id="seriesPane">
+    </div>
+    <div id="wrap">
+
+    </div>
+    <div id="footer_tool">
+        <div class="tool" id="btn-toggle-series-view" style="display: none;">
+            <div class="tool-icon">
+                <i class="iconfont icon-list2"></i>
+            </div>
+            <span class="text">&nbsp;</span>
+        </div>
+        <div class="tool tool-split" id="btn-layout">
+            <div class="tool-icon">
+                <i class="iconfont icon-buju"></i>
+            </div>
+            <span class="text">布局</span>
+        </div>
+        <div class="tool tool-split" id="btn-layout-disabled" style="display: none;">
+            <div class="tool-icon">
+                <i class="iconfont icon-buju"></i>
+            </div>
+            <span class="text">布局</span>
+        </div>
+        <div class="tool selected" id="btn-windowing">
+            <div class="tool-icon">
+                <i class="iconfont icon-tiaose"></i>
+            </div>
+            <span class="text">调窗</span>
+        </div>
+
+        <div class="tool tool-split" id="btn-inverse">
+            <div class="tool-icon">
+                <i class="iconfont icon-fanse"></i>
+            </div>
+            <span class="text">反色</span>
+        </div>
+
+        <div class="tool" id="btn-pan">
+            <div class="tool-icon">
+                <i class="iconfont icon-pingyi"></i>
+            </div>
+            <span class="text">平移</span>
+        </div>
+
+        <div class="tool" id="btn-zoom">
+            <div class="tool-icon">
+                <i class="iconfont icon-suofang"></i>
+            </div>
+            <span class="text">缩放</span>
+        </div>
+
+
+        <div class="tool" id="btn-rotation-left">
+            <div class="tool-icon">
+                <i class="iconfont icon-zuoxuan"></i>
+            </div>
+            <span class="text">左旋</span>
+        </div>
+
+        <div class="tool" id="btn-rotation-right">
+            <div class="tool-icon">
+                <i class="iconfont icon-youxuan"></i>
+            </div>
+            <span class="text">右旋</span>
+        </div>
+
+        <div class="tool" id="btn-reset">
+            <div class="tool-icon">
+                <i class="iconfont icon-huifu"></i>
+            </div>
+            <span class="text">重置</span>
+        </div>
+
+        <div class="tool" id="btn-measure">
+            <div class="tool-icon">
+                <i class="iconfont icon-celiang"></i>
+            </div>
+            <span class="text">测量</span>
+
+            <div style="position: absolute;z-index: 100;right: 12px;top: 35px;" class="arrow-up"></div>
+        </div>
+        <div id="measure-menu" class="measure-menu">
+            <ul>
+                <li id="btn-line">
+                    <i class="iconfont icon-zhixian"></i>
+                    <span class="text">直线</span>
+                </li>
+                <li id="btn-angle">
+                    <i class="iconfont icon-liangjiao"></i>
+                    <span class="text">量角</span>
+                </li>
+                <li id="btn-ellipse">
+                    <i class="iconfont icon-tuoyuan"></i>
+                    <span class="text">椭圆</span>
+                </li>
+                <li id="btn-rectangle">
+                    <i class="iconfont icon-juxing"></i>
+                    <span class="text">矩形</span>
+                </li>
+                <li id="btn-probe">
+                    <i class="iconfont icon-tanzhen"></i>
+                    <span class="text">探针</span>
+                </li>
+                <li id="btn-annotation">
+                    <i class="iconfont icon-jiantouxianhewenzi"></i>
+                    <span class="text">标注</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tool tool-split" id="btn-eraser">
+            <div class="tool-icon">
+                <i class="iconfont icon-qingli"></i>
+            </div>
+            <span class="text">清理</span>
+        </div>
+
+        <div class="tool tool-split" id="btn-play">
+            <div class="tool-icon">
+                <i class="iconfont icon-bofang"></i>
+            </div>
+            <span class="text">播放</span>
+        </div>
+        <div class="tool tool-split" id="btn-stop" style="display: none;">
+            <div class="tool-icon">
+                <i class="iconfont icon-tingzhi"></i>
+            </div>
+            <span class="text">停止</span>
+        </div>
+
+        <div class="tool" id="btn-meeting">
+            <div class="tool-icon">
+                <i class="iconfont icon-huiyi"></i>
+            </div>
+            <span class="text">会议</span>
+        </div>
+
+        <div class="tool" style="float: right;" id="btn_cross">
+            <div class="tool-icon">
+                <i class="iconfont icon-chuanyue"></i>
+            </div>
+            <span class="text">穿越</span>
+        </div>
+    </div>
+</div>
+<div id="topPromptInfo"></div>
+<dialog class="annotationDialog">
+    <h5>输入注解</h5>
+
+    <div class="annotationTextInputOptions">
+        <label>注解内容：</label>
+        <input name="annotationTextInput" class="annotationTextInput" type="text"/>
+    </div>
+    <a class="annotationDialogConfirm btn btn-sm btn-primary">确定</a>
+</dialog>
+<dialog class="relabelDialog" oncontextmenu="return false">
+    <h5>输入注解</h5>
+
+    <div class="annotationTextInputOptions">
+        <label>注解内容：</label>
+        <input name="annotationTextInput" class="annotationTextInput" type="text"/>
+    </div>
+    <div>
+        <a class="relabelRemove btn btn-sm btn-secondary">移除</a>
+        <a class="relabelConfirm btn btn-sm btn-primary">确定</a>
+    </div>
+</dialog>
+<div id="ctPresetWrapper" style="position: absolute;left: 186px;top: 100px;z-index: 10;display: none;">
+    <div data-ww="350" data-wc="40" class="wwwc-ctrl">纵膈窗</div>
+    <div data-ww="1000" data-wc="-650" class="wwwc-ctrl">肺窗</div>
+    <div data-ww="1500" data-wc="-500" class="wwwc-ctrl">肺高分辨</div>
+    <div data-ww="200" data-wc="50" class="wwwc-ctrl">肝脏</div>
+    <div data-ww="350" data-wc="40" class="wwwc-ctrl">肾脏</div>
+    <div data-ww="2000" data-wc="450" class="wwwc-ctrl">椎间盘骨窗</div>
+    <div data-ww="1600" data-wc="450" class="wwwc-ctrl">头颅骨窗</div>
+    <div data-ww="1600" data-wc="550" class="wwwc-ctrl">关节骨窗</div>
+</div>
+<script src="__TMPL__/public/lib/jquery.min.js"></script>
+<script src="__TMPL__/public/lib/jquery-ui.min.js"></script>
+<script src="__TMPL__/public/lib/hammer.min.js"></script>
+<script src="__TMPL__/public/lib/bootstrap.min.js"></script>
+<script src="__TMPL__/public/lib/op.js"></script>
+<script src="__TMPL__/public/lib/opMath.js"></script>
+<script src="__TMPL__/public/lib/opTools.js?v=1.9"></script>
+<script src="__TMPL__/public/lib/opLoader_wado.js?v=1"></script>
+<script src="__TMPL__/public/lib/opLoader_web.js"></script>
+<script src="__TMPL__/public/lib/dicomParser.js"></script>
+<script src="__TMPL__/public/js/setupViewport.js"></script>
+<script src="__TMPL__/public/js/displayThumbnail.js"></script>
+<script src="__TMPL__/public/js/loadStudy.js?v=4.0"></script>
+<script src="__TMPL__/public/js/setupButtons.js?v=2"></script>
+<script src="__TMPL__/public/js/disableAllTools.js?v=2"></script>
+<script src="__TMPL__/public/js/forEachViewport.js"></script>
+<script src="__TMPL__/public/js/imageViewer.js"></script>
+<script src="__TMPL__/public/js/loadTemplate.js"></script>
+<script src="__TMPL__/public/js/layout.js"></script>
+<script src="__TMPL__/public/js/setupViewportOverlays.js"></script>
+<script src="__TMPL__/public/js/op_app.js"></script>
+<script src="__TMPL__/public/js/dialogPolyfill.js"></script>
+<script src="__TMPL__/public/js/socket.io-1.1.0.js"></script>
+<script type="text/javascript">
+    function adjustLayout() {
+        var width = $(window).width();
+        var height = $(window).height();
+        $('#wrap').width(width - 170).height(height - 80);
+        window.setTimeout(function () {
+            $('#seriesPane').height(height - 80);
+        }, 3000)
+    }
+
+    $(function () {
+        adjustLayout();
+        $(window).resize(adjustLayout);
+
+        loadData();
+    });
+</script>
+<script>
+    $('.tool').click(function () {
+        $('.tool').find('i').removeClass('mys');
+        $(this).find('i').addClass('mys')
+
+    })
+</script>
+<script type="text/javascript">
+    var restAddress = 'http://m.yzhcloud.com/api/yjy.action.php/study/';
+    var studyInstanceUID = '1.2.826.0.1.3680043.2.461.10084994.452087012';
+    var org = '103';
+    var requestDicomUrl = restAddress + org + '/' + studyInstanceUID;
+    var study = {};
+    var currentImageViewer = null;
+    var isShowingSeriesNav = true;
+    var res = null;
+
+    function loadData() {
+        $.ajax({
+            url: "1.json", // 请求目标
+            type: "GET", // 请求类型 POST 或者 GET(默认)
+            success: function (res) {
+
+                study = res.result;
+                for (var i = 0; i < study.series.length; i++) {
+                    if (study.series[i].series_description == '' || study.series[i].series_description == null) study.series[i].series_description = 'N/A';
+                    var instanceUrls = [];
+                    var instanceIds = study.series[i].instance_ids.split(',');
+                    for (var j = 0; j < instanceIds.length; j++) {
+
+                        if (study.source == 'jpg' || study.modality == 'MG' || study.modality == 'DR' || study.modality == 'CR' || study.modality == 'RF' || study.modality == 'DX') {
+                            instanceUrls.push('{0}{1}/{2}.{3}.jpg'.format(study.storage, study.study_instance_uid, study.series[i].series_number, instanceIds[j]));
+                        } else if (study.source == 'png') {
+                            instanceUrls.push('{0}{1}/{2}.{3}.png'.format(study.storage.replace('dicomweb', 'http'), study.study_instance_uid, study.series[i].series_number, instanceIds[j]));
+                        } else {
+                            if (instanceIds[j].indexOf('png') > 0) {
+                                instanceUrls.push('{0}{1}/{2}.{3}.png'.format(study.storage, study.study_instance_uid, study.series[i].series_number, instanceIds[j].replace('|png', '')));
+                            } else {
+                                instanceUrls.push('{0}{1}/{2}.{3}.dcm'.format(study.storage, study.study_instance_uid, study.series[i].series_number, instanceIds[j]));
+
+                            }
+                        }
+                    }
+                    study.series[i].instanceList = instanceUrls;
+
+                }
+                //renderSeriesList();
+                window.setTimeout(function () {
+                    var studyViewerCopy = studyViewerTemplate.clone();
+                    studyViewerCopy.attr("id", 'x' + study.patient_id);
+                    studyViewerCopy.removeClass('hidden');
+                    // Add section to the tab content
+                    studyViewerCopy.appendTo('#wrap');
+                    loadStudy(studyViewerCopy, viewportTemplate);
+                }, 1000);
+
+                if (study.modality == 'CT') {
+                    $('#ctPresetWrapper').show();
+                    $('.wwwc-ctrl').click(function () {
+                        var ww = $(this).attr('data-ww');
+                        var wc = $(this).attr('data-wc');
+
+                        forEachViewport(function (element) {
+                            var viewport = cornerstone.getViewport(element);
+                            viewport.voi.windowWidth = parseFloat(ww);
+                            viewport.voi.windowCenter = parseFloat(wc);
+                            cornerstone.setViewport(element, viewport);
+                        });
+                    });
+                }
+
+
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    String.prototype.format = function (args) {
+        var result = this;
+        if (arguments.length > 0) {
+            if (arguments.length == 1 && typeof (args) == "object") {
+                for (var key in args) {
+                    if (args[key] != undefined) {
+                        var reg = new RegExp("({" + key + "})", "g");
+                        result = result.replace(reg, args[key]);
+                    }
+                }
+            }
+            else {
+                for (var i = 0; i < arguments.length; i++) {
+                    if (arguments[i] != undefined) {
+                        var reg = new RegExp("({)" + i + "(})", "g");
+                        result = result.replace(reg, arguments[i]);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    function showCrossWrapper() {
+        document.getElementById("bg").style.display = "block";
+        document.getElementById("cross-dlg").style.display = "block";
+    }
+
+    function hideCrossWrapper() {
+        document.getElementById("bg").style.display = 'none';
+        document.getElementById("cross-dlg").style.display = 'none';
+    }
+</script>
+<script type="text/javascript">
+    function guid() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+
+    var meetingEnabled = false;
+    var curSessionId = guid();
+    var my_room = studyInstanceUID;
+    var socket = null;
+    var isEmitSwitchAction = true;
+    var isEmitScrollImageAction = true;
+
+
+    function enableMeeting() {
+        meetingEnabled = true;
+        socket = io("http://yzhcloud.com:8091");
+
+        socket.on('connect', function () {
+            socket.emit('room', my_room);
+        });
+
+        socket.on('send_message', function (msg) {
+            if (!meetingEnabled) return false;
+            var msg1 = eval('(' + msg + ')');//json数据 序列化成js对象
+            if (msg1.my_name == curSessionId) return;
+            var content = msg1.my_content.split('|');
+            var eventName = content[0];
+            var eventParm1 = content[1];
+            var eventParm2 = content[2];
+            var seriesIndex, imageIndex;
+            switch (eventName) {
+                case 'Layout'://布局
+                    var page = eventParm1;
+                    break;
+                case 'WCWL'://窗宽窗位
+                    var id = eventParm1;
+                    action_windowing();
+                    break;
+                case 'WCWL-Listener'://窗宽窗位监听
+                    var ww = content[1];
+                    var wc = content[2];
+                    forEachViewport(function (element) {
+                        var viewport = cornerstone.getViewport(element);
+                        viewport.voi.windowWidth = parseFloat(ww);
+                        viewport.voi.windowCenter = parseFloat(wc);
+                        cornerstone.setViewport(element, viewport);
+                    });
+                    break;
+                case 'Pan-Listener'://移动-监听
+                    var x = content[1];
+                    var y = content[2];
+                    forEachViewport(function (element) {
+                        var viewport = cornerstone.getViewport(element);
+                        viewport.translation.x = parseFloat(x);
+                        viewport.translation.y = parseFloat(y);
+                        cornerstone.setViewport(element, viewport);
+                    });
+                    break;
+                case 'Zoom-Listener'://缩放-监听
+                    var scale = content[1];
+                    forEachViewport(function (element) {
+                        var viewport = cornerstone.getViewport(element);
+                        viewport.scale = parseFloat(scale);
+                        cornerstone.setViewport(element, viewport);
+                    });
+                    break;
+                case 'SwitchSeries':
+                    var stackIndex = content[1];
+                    isEmitSwitchAction = false;
+                    $('.seriesPart:eq(' + stackIndex + ')').click();
+                    break;
+                case 'Inverse'://反色
+                    action_inverse();
+                    break;
+                case 'Pan'://平移
+                    var id = eventParm1;
+                    action_pan();
+                    break;
+                case 'Zoom'://缩放
+                    var id = eventParm1;
+                    action_zoom();
+                    break;
+                case 'RotationLeft'://左旋
+                    var id = eventParm1;
+                    action_rotation_left();
+                    break;
+                case 'RotationRight'://右旋
+                    var id = eventParm1;
+                    action_rotation_right();
+                    break;
+                case 'Reset'://重置
+                    var id = eventParm1;
+                    action_reset();
+                    break;
+                case 'Eraser'://清理
+                    var id = eventParm1;
+                    action_eraser();
+                    break;
+                case 'Play'://播放
+                    var id = eventParm1;
+                    action_play();
+                    break;
+                case 'StopPlay':
+                    action_stop_play();
+                    break;
+                case 'M-Line'://测量-直线
+                    action_m_line();
+                    break;
+                case 'M-Angle'://测量-角度
+                    action_m_angle();
+                    break;
+                case 'M-Probe'://测量-探针
+                    action_m_probe();
+                    break;
+                case 'M-Ellipse'://测量-椭圆
+                    action_m_ellipse();
+                    break;
+                case 'M-Annotation'://测量-标注
+                    action_m_annotation();
+                    break;
+                case 'M-Rectangle'://测量-矩形
+                    action_m_rectangle();
+                    break;
+                case 'Scroll'://滚动
+                    var pageId = parseInt(content[1]);
+                    isEmitScrollImageAction = false;
+                    specifyImageIndex(pageId);
+                    break;
+                default:
+            }
+        });
+    }
+
+    function emitMessage(content) {
+        if (!meetingEnabled) return false;
+        var msg = {
+            "my_room": my_room,
+            "my_name": curSessionId,
+            "my_content": content
+        };
+        socket.emit('send_message', JSON.stringify(msg));
+    }
+
+    function lineListener() {
+        forEachViewport(function (element) {
+            // if we have no toolData for this element, return immediately as there is nothing to do
+            var toolData = cornerstoneTools.getToolState(element, 'length');
+            if (toolData === undefined) {
+                return;
+            }
+
+            // we have tool data for this element - iterate over each one and draw it
+            var canvas = $('canvas').get(0)
+            var context = canvas.getContext("2d");
+            context.setTransform(1, 0, 0, 1, 0, 0);
+
+            var color;
+            var lineWidth = cornerstoneTools.toolStyle.getToolWidth();
+            var font = cornerstoneTools.textStyle.getFont();
+            var config = cornerstoneTools.length.getConfiguration();
+
+            for (var i = 0; i < toolData.data.length; i++) {
+                context.save();
+                // configurable shadow
+                if (config && config.shadow) {
+                    context.shadowColor = '#000000';
+                    context.shadowOffsetX = +1;
+                    context.shadowOffsetY = +1;
+                }
+
+                var data = toolData.data[i];
+
+                if (data.active) {
+                    color = cornerstoneTools.toolColors.getActiveColor();
+                } else {
+                    color = cornerstoneTools.toolColors.getToolColor();
+                }
+
+                // draw the line
+                var handleStartCanvas = cornerstone.pixelToCanvas(element, data.handles.start);
+                var handleEndCanvas = cornerstone.pixelToCanvas(element, data.handles.end);
+
+                context.beginPath();
+                context.strokeStyle = color;
+                context.lineWidth = lineWidth;
+                context.moveTo(handleStartCanvas.x, handleStartCanvas.y);
+                context.lineTo(handleEndCanvas.x, handleEndCanvas.y);
+                context.stroke();
+
+                // draw the handles
+                //cornerstoneTools.drawHandles(context, eventData, data.handles, color);
+
+                // Draw the text
+                context.fillStyle = color;
+                context.font = font;
+
+                var suffix = ' mm';
+                if (!eventData.image.rowPixelSpacing || !eventData.image.columnPixelSpacing) { //todo
+                    suffix = ' pixels';
+                }
+
+                // Set rowPixelSpacing and columnPixelSpacing to 1 if they are undefined (or zero)
+                var dx = (data.handles.start.x - data.handles.end.x) * (eventData.image.columnPixelSpacing || 1); //todo
+                var dy = (data.handles.start.y - data.handles.end.y) * (eventData.image.rowPixelSpacing || 1);
+
+                var length = Math.sqrt(dx * dx + dy * dy);
+                var text = '' + length.toFixed(2) + suffix;
+
+                var textCoords = {
+                    x: (handleStartCanvas.x + handleEndCanvas.x) / 2 + 5,
+                    y: (handleStartCanvas.y + handleEndCanvas.y) / 2
+                };
+
+                cornerstoneTools.drawTextBox(context, text, textCoords.x, textCoords.y, color);
+                context.restore();
+            }
+        });
+    }
+
+    function specifyImageIndex(newImageIdIndex) {
+        forEachViewport(function (imageElement) {
+            // Get the stack data
+            var stackToolDataSource = cornerstoneTools.getToolState(imageElement, 'stack');
+            if (stackToolDataSource === undefined) {
+                return;
+            }
+            var stackData = stackToolDataSource.data[0];
+            if (newImageIdIndex == 'next') {
+                newImageIdIndex = stackData.currentImageIdIndex + 1;
+            }
+            if (newImageIdIndex == 'pre') {
+                newImageIdIndex = stackData.currentImageIdIndex - 1;
+            }
+            // Switch images, if necessary
+            if (newImageIdIndex !== stackData.currentImageIdIndex && stackData.imageIds[newImageIdIndex] !== undefined) {
+                cornerstone.loadAndCacheImage(stackData.imageIds[newImageIdIndex]).then(function (image) {
+                    var viewport = cornerstone.getViewport(imageElement);
+                    stackData.currentImageIdIndex = newImageIdIndex;
+                    cornerstone.displayImage(imageElement, image, viewport);
+                    cornerstoneTools.orientationMarkers.enable(imageElement);
+                });
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>

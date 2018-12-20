@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/css/font.css">
+    <link rel="stylesheet" href="../../static/css/weadmin.css">
+    <style>
+        .weadmin-body{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            padding: 15px;
+            box-sizing: border-box;
+            overflow: auto;
+            left: 0;
+            background-color: #f5f5fa;
+        }
+        .right{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<div class="weadmin-body">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-header">车操成绩录入
+                    <div class="right" style="margin:1px 10px 0 0">
+                        <div class="layui-inline">
+                            <input type="text" name="username" placeholder="请输入所属机构" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-inline">
+                            <input type="text" name="username" placeholder="请输入车操名称" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-inline">
+                            <input type="text" name="username" placeholder="请输入训练日期" autocomplete="off" class="layui-input">
+                        </div>
+                        <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                        <button class="layui-btn" onclick="WeAdminEdit('添加','ResultInput.html', 1, 1100, 800)"><i
+                                class="layui-icon"></i>添加
+                        </button>
+                    </div>
+                </div>
+                <div class="layui-card-body ">
+                    <table class="layui-table" id="memberList">
+                        <thead>
+                        <tr>
+                            <th style="width: 30px;">序号</th>
+                            <th>车操名称</th>
+                            <th>训练日期</th>
+                            <th>所属机构</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>百米障碍救助操</td>
+                            <td>2018-11-28</td>
+                            <td>特勤一中队</td>
+                            <td class="td-manage" onclick="WeAdminEdit('查看','Popup/CarsInfo.html', 1, 1000, 600)">
+                                <a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:;" title="启用">查看</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>车辆事故处置救援操</td>
+                            <td>2018-11-27</td>
+                            <td>特勤一中队</td>
+                            <td class="td-manage" onclick="WeAdminEdit('查看','Popup/CarsInfo.html', 1, 1000, 600)">
+                                <a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:;" title="启用">查看</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>初战快速出水控火操</td>
+                            <td>2018-11-27</td>
+                            <td>特勤一中队</td>
+                            <td class="td-manage" onclick="WeAdminEdit('查看','Popup/CarsInfo.html', 1, 1000, 600)">
+                                <a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:;" title="启用">查看</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>两车三枪操</td>
+                            <td>2018-11-26</td>
+                            <td>特勤一中队</td>
+                            <td class="td-manage" onclick="WeAdminEdit('查看','Popup/CarsInfo.html', 1, 1000, 600)">
+                                <a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:;" title="启用">查看</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>楼层火灾救人操</td>
+                            <td>2018-11-26</td>
+                            <td>特勤一中队</td>
+                            <td class="td-manage" onclick="WeAdminEdit('查看','Popup/CarsInfo.html', 1, 1000, 600)">
+                                <a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:;" title="启用">查看</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>楼层火灾内攻操</td>
+                            <td>2018-11-25</td>
+                            <td>特勤一中队</td>
+                            <td class="td-manage" onclick="WeAdminEdit('查看','Popup/CarsInfo.html', 1, 1000, 600)">
+                                <a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:;" title="启用">查看</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>攀登15米金属拉梯操</td>
+                            <td>2018-11-25</td>
+                            <td>特勤一中队</td>
+                            <td class="td-manage" onclick="WeAdminEdit('查看','Popup/CarsInfo.html', 1, 1000, 600)">
+                                <a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:;" title="启用">查看</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>枪炮协同灭火操</td>
+                            <td>2018-11-24</td>
+                            <td>特勤一中队</td>
+                            <td class="td-manage" onclick="WeAdminEdit('查看','Popup/CarsInfo.html', 1, 1000, 600)">
+                                <a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:;" title="启用">查看</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>纵深灭火救人操</td>
+                            <td>2018-11-24</td>
+                            <td>特勤一中队</td>
+                            <td class="td-manage" onclick="WeAdminEdit('查看','Popup/CarsInfo.html', 1, 1000, 600)">
+                                <a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:;" title="启用">查看</a>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../lib/layui/layui.all.js" charset="utf-8"></script>
+<script src="../../static/js/jquery-3.3.1.min.js"></script>
+<script src="../Healthy/js/list.js"></script>
+</body>
+</html>

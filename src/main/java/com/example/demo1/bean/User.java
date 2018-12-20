@@ -1,15 +1,30 @@
 package com.example.demo1.bean;
 
+import java.util.Date;
+
+/**
+ * 用户表
+ */
 public class User {
     private int id;
+    //用户编号
     private String uid;
+    //手机号
     private String phone;
+    //状态
     private int status;
-    private String deptid;
+    //医院机构
+    private String dept;
+    //微信标识
     private String openid;
+    //用户信息
     private String name;
+    //性别 0男1女
     private int sex;
+    //年龄
     private int age;
+    //创建时间
+    private Date creation_time;
 
     public int getId() {
         return id;
@@ -43,12 +58,12 @@ public class User {
         this.status = status;
     }
 
-    public String getDeptid() {
-        return deptid;
+    public String getDept() {
+        return dept;
     }
 
-    public void setDeptid(String deptid) {
-        this.deptid = deptid;
+    public void setDept(String dept) {
+        this.dept = dept;
     }
 
     public String getOpenid() {

@@ -1,0 +1,76 @@
+{
+  "status": 200,
+  "message": "",
+  "result": {
+    "is_positive": "2",
+    "disease_classify": "0",
+    "organisation_id": "103",
+    "patient_name": "Cao^RanYue",
+    "patient_sex": "M",
+    "patient_age": "003M",
+    "patient_id": "2971480",
+    "protocol_name": "t2_tse_tra_320",
+    "study_date": "20180626154401.25900",
+    "accession_number": "1408216458",
+    "modality": "MR",
+    "device": "MRC40535",
+    "description": "head^library",
+    "bodypart": "HEAD",
+    "storage": "dicomweb:\/\/ks3-cn-shanghai.ksyun.com\/suchen\/ceshi\/",
+    "study_instance_uid": "CT",
+    "source": "Gateway",
+    "series_count": "6",
+    "instance_count": "163",
+    "has_jpeg": "1",
+    "patient_chinese_name": "曹然越",
+    "outpatient_id": "000367169300",
+    "inpatient_id": "1042951",
+    "checkitems": "头颅;",
+    "patient_source": "儿童重症监护病房(P",
+    "apply_department": "儿童重症监护病房(PIC",
+    "apply_doctor": "",
+    "clinical_diagnosis": null,
+    "upload_file": "",
+    "series": [
+      {
+        "series_instance_uid": "1.3.12.2.1107.5.2.36.40535.2018062615475393147464051.0.0.0",
+        "series_number": "2",
+        "series_description": "t2_tse_tra_320",
+        "frame_rate": "0",
+        "frame_numbers": "1",
+        "instance_ids": "1,2,3,4,5,6,7,8,9,10",
+        "bak1": null,
+        "slice_thickness": "4"
+      },
+      {
+        "series_instance_uid": "1.3.12.2.1107.5.2.36.40535.30000018061823375242200014080",
+        "series_number": "100",
+        "series_description": "",
+        "frame_rate": "0",
+        "frame_numbers": "1",
+        "instance_ids": "1|png,2|png,3|png,4|png,5|png,6|png,7|png,8|png,9|png,10|png,11|png,12|png,13|png,14|png,15|png,16|png,17|png,18|png,19|png,20|png",
+        "bak1": null,
+        "slice_thickness": ""
+      }
+    ],
+    "report": [
+      {
+        "reporter_id": "0",
+        "report_time": "1530005535",
+        "reporter": "36691482608474316",
+        "approver_id": "0",
+        "approve_time": "1530058168",
+        "approver": "291",
+        "structured_data": "{&quot;Findings&quot;:&quot;颅脑MR平扫\n    左侧额颞叶见多发斑片状异常信号，T1WI呈低信号，T2WI呈高信号，T2flair序列呈高信号，DWI呈高信号。病变边界欠清楚。脑室、脑池、脑沟及脑裂形态信号未见异常。中线结构居中。&quot;,&quot;Impression&quot;:&quot;左侧额颞叶多发异常信号灶，考虑脑炎治疗后表现，请结合临床。&quot;}",
+        "report_status": "3",
+        "findings": "颅脑MR平扫<br>    左侧额颞叶见多发斑片状异常信号，T1WI呈低信号，T2WI呈高信号，T2flair序列呈高信号，DWI呈高信号。病变边界欠清楚。脑室、脑池、脑沟及脑裂形态信号未见异常。中线结构居中。",
+        "impression": "左侧额颞叶多发异常信号灶，考虑脑炎治疗后表现，请结合临床。"
+      }
+    ],
+    "qc": []
+  },
+  "task_points": {
+    "points": 0,
+    "task_id": ""
+  }
+}

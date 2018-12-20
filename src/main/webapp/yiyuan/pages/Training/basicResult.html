@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/css/font.css">
+    <link rel="stylesheet" href="../../static/css/weadmin.css">
+    <style>
+
+        .carImg > img {
+            width: 100%;
+            height: 350px;
+        }
+
+        .section-two-div {
+            border-radius: 10px;
+            /*color: #fff;*/
+            margin-top: 7px;
+            text-align: center;
+            float: left;
+            box-shadow: 0 1px 5px 0 rgba(0,0,0,.2);
+            /*border: 1px solid #ddd;*/
+            /*background-color: #3385ff;*/
+            height: 120px;
+            margin-left: 1%;
+            font-size: 16px;
+            width: 7%;
+            padding: 1% 0;
+        }
+
+        .section-two-div img {
+            width: 60px;
+            display: inline-block;
+            margin-bottom: 8px;
+            height: 60px;
+        }
+
+        .car-top {
+            width: 100%;
+            overflow: auto;
+            height: 170px;
+        }
+
+        .section-two-div-bg {
+            background-color: #f2f2f2;
+            /*border: 1px solid #cdcfdb;*/
+        }
+    </style>
+</head>
+<body>
+<!--<div class="weadmin-nav">-->
+			<!--<span class="layui-breadcrumb">-->
+        <!--<a href="">首页</a>-->
+        <!--<a href="">训练管理</a>-->
+        <!--<a>-->
+          <!--<cite>车操成绩录入</cite></a>-->
+      <!--</span>-->
+    <!--<a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float:right"-->
+       <!--href="javascript:location.replace(location.href);" title="刷新">-->
+        <!--<i class="layui-icon" style="line-height:30px">&#x1002;</i></a>-->
+<!--</div>-->
+<div class="weadmin-body">
+    <div class="car-top">
+        <div style="width: 100%">
+            <div class="section-two-div section-two-div-bg">
+                <div><img src="img/3000米.png" alt=""></div>
+                <div>3000米</div>
+            </div>
+            <div class="section-two-div">
+                <div><img src="img/单杠卷身上.png" alt=""></div>
+                <div>单杠卷身上</div>
+            </div>
+            <div class="section-two-div">
+                <div><img src="img/双杠臂屈伸.png" alt=""></div>
+                <div>双杠臂屈伸</div>
+            </div>
+            <div class="section-two-div">
+                <div><img src="img/搬运重物折返跑.png" alt=""></div>
+                <div>搬运重物折返跑</div>
+            </div>
+            <div class="section-two-div">
+                <div><img src="img/绳索攀爬.png" alt=""></div>
+                <div>绳索攀爬</div>
+            </div>
+            <div class="section-two-div">
+                <div><img src="img/俯卧撑.png" alt=""></div>
+                <div>俯卧撑</div>
+            </div>
+            <div class="section-two-div">
+                <div><img src="img/背负空气呼吸器5000米跑.png" alt=""></div>
+                <div>背负空气呼吸器5000米跑</div>
+            </div>
+            <div class="section-two-div">
+                <div><img src="img/400米疏散物资救人.png" alt=""></div>
+                <div>400米疏散物资救人</div>
+            </div>
+            <div class="section-two-div">
+                <div><img src="img/仰卧起坐.png" alt=""></div>
+                <div>仰卧起坐</div>
+            </div>
+            <div class="section-two-div">
+                <div><img src="img/100米负重跑.png" alt=""></div>
+                <div>100米负重跑</div>
+            </div>
+            <div class="section-two-div">
+                <div><img src="img/60米肩梯跑.png" alt=""></div>
+                <div>60米肩梯跑</div>
+            </div>
+            <div class="section-two-div">
+                <div><img src="img/负重攀爬10层楼.png" alt=""></div>
+                <div>负重攀爬10层楼</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 we-search">
+            <div class="layui-inline">
+                <input type="text" class="layui-input" placeholder="请选择训练日期" id="test1">
+            </div>
+            <span class="layui-btn layui-btn-normal">保存</span>
+        </form>
+    </div>
+    <table class="layui-table" id="memberList">
+        <colgroup>
+            <col width="60">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>所属机构</th>
+            <th>姓名</th>
+            <th>项目名称</th>
+            <th>成绩</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript" src="../../lib/layui/layui.all.js" charset="utf-8"></script>
+<script src="../../lib/layui/echart.js"></script>
+<script src="../../static/js/jquery-3.3.1.min.js"></script>
+<script src="../Healthy/js/list.js"></script>
+<script>
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1' //指定元素
+        });
+    });
+    $(".section-two-div").click(function () {
+        var num = $(this).index();
+        $(".section-two-div").removeClass('section-two-div-bg');
+        $(this).addClass('section-two-div-bg');
+        if(num == 0){
+            aaxx('3000米');
+        }else if(num == 1){
+            aaxx('单杠卷身上');
+        }else if(num == 2){
+            aaxx('双杠臂屈伸');
+        }else if(num == 3){
+            aaxx('搬运重物折返跑');
+        }else if(num == 4){
+            aaxx('绳索攀爬');
+        }else if(num == 5){
+            aaxx('俯卧撑');
+        }else if(num == 6){
+            aaxx('背负空气呼吸器5000米跑');
+        }else if(num == 7){
+            aaxx('400米疏散物资救人');
+        }else if(num == 8){
+            aaxx('仰卧起坐');
+        }else if(num == 9){
+            aaxx('100米负重跑');
+        }else if(num == 10){
+            aaxx('60米肩梯跑');
+        }else if(num == 11){
+            aaxx('负重攀爬10层楼');
+        }
+    })
+    aaxx('3000米');
+    function aaxx(e) {
+        var tbody = '';
+        tbody += '<tr >\n' +
+            '                <td>1</td>\n' +
+            '                <td>特勤一中队</td>\n' +
+            '                <td>李磊</td>\n' +
+            '                <td>'+e+'</td>\n' +
+            '                <td>\n' +
+            '                     <input type="text" name="title" required lay-verify="required" placeholder="请输入成绩"\n' +
+            '                       autocomplete="off" class="layui-input">' +
+            '                </td>\n' +
+            '            </tr>\n'+
+            '<tr >\n' +
+            '                <td>2</td>\n' +
+            '                <td>特勤一中队</td>\n' +
+            '                <td>孙东剑</td>\n' +
+            '                <td>'+e+'</td>\n' +
+            '                <td>\n' +
+            '                     <input type="text" name="title" required lay-verify="required" placeholder="请输入成绩"\n' +
+            '                       autocomplete="off" class="layui-input">' +
+            '                </td>\n' +
+            '            </tr>\n'+
+            '<tr >\n' +
+            '                <td>3</td>\n' +
+            '                <td>特勤一中队</td>\n' +
+            '                <td>孙运超</td>\n' +
+            '                <td>'+e+'</td>\n' +
+            '                <td>\n' +
+            '                     <input type="text" name="title" required lay-verify="required" placeholder="请输入成绩"\n' +
+            '                       autocomplete="off" class="layui-input">' +
+            '                </td>\n' +
+            '            </tr>\n'+
+            '<tr >\n' +
+            '                <td>4</td>\n' +
+            '                <td>特勤一中队</td>\n' +
+            '                <td>康三亚</td>\n' +
+            '                <td>'+e+'</td>\n' +
+            '                <td>\n' +
+            '                     <input type="text" name="title" required lay-verify="required" placeholder="请输入成绩"\n' +
+            '                       autocomplete="off" class="layui-input">' +
+            '                </td>\n' +
+            '            </tr>\n'+
+            '<tr >\n' +
+            '                <td>5</td>\n' +
+            '                <td>特勤一中队</td>\n' +
+            '                <td>罗阿洲</td>\n' +
+            '                <td>'+e+'</td>\n' +
+            '                <td>\n' +
+            '                     <input type="text" name="title" required lay-verify="required" placeholder="请输入成绩"\n' +
+            '                       autocomplete="off" class="layui-input">' +
+            '                </td>\n' +
+            '            </tr>\n'+
+            '<tr >\n' +
+            '                <td>6</td>\n' +
+            '                <td>特勤一中队</td>\n' +
+            '                <td>刘准生</td>\n' +
+            '                <td>'+e+'</td>\n' +
+            '                <td>\n' +
+            '                     <input type="text" name="title" required lay-verify="required" placeholder="请输入成绩"\n' +
+            '                       autocomplete="off" class="layui-input">' +
+            '                </td>\n' +
+            '            </tr>\n'+
+            '<tr >\n' +
+            '                <td>7</td>\n' +
+            '                <td>特勤一中队</td>\n' +
+            '                <td>何强</td>\n' +
+            '                <td>'+e+'</td>\n' +
+            '                <td>\n' +
+            '                     <input type="text" name="title" required lay-verify="required" placeholder="请输入成绩"\n' +
+            '                       autocomplete="off" class="layui-input">' +
+            '                </td>\n' +
+            '            </tr>\n'+
+            '<tr >\n' +
+            '                <td>8</td>\n' +
+            '                <td>特勤一中队</td>\n' +
+            '                <td>卢国明</td>\n' +
+            '                <td>'+e+'</td>\n' +
+            '                <td>\n' +
+            '                     <input type="text" name="title" required lay-verify="required" placeholder="请输入成绩"\n' +
+            '                       autocomplete="off" class="layui-input">' +
+            '                </td>\n' +
+            '            </tr>\n'+
+            '<tr >\n' +
+            '                <td>9</td>\n' +
+            '                <td>特勤一中队</td>\n' +
+            '                <td>刘书琪</td>\n' +
+            '                <td>'+e+'</td>\n' +
+            '                <td>\n' +
+            '                     <input type="text" name="title" required lay-verify="required" placeholder="请输入成绩"\n' +
+            '                       autocomplete="off" class="layui-input">' +
+            '                </td>\n' +
+            '            </tr>\n'+
+            '<tr >\n' +
+            '                <td>10</td>\n' +
+            '                <td>特勤一中队</td>\n' +
+            '                <td>王金龙</td>\n' +
+            '                <td>'+e+'</td>\n' +
+            '                <td>\n' +
+            '                     <input type="text" name="title" required lay-verify="required" placeholder="请输入成绩"\n' +
+            '                       autocomplete="off" class="layui-input">' +
+            '                </td>\n' +
+            '            </tr>';
+
+        $("#tbody").html(tbody);
+
+    }
+</script>
+</body>
+</html>

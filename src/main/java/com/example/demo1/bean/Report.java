@@ -1,23 +1,50 @@
 package com.example.demo1.bean;
 import java.util.Date;
 
+/**
+ * 病人检查报告
+ */
 public class Report {
+    //本系统主键ID
     private int id;
+    //系统中病人检查报告唯一id
+    private String report_id;
+    //关联医院系统中用户唯一id
+    private String uid;
+    //检查项目
     private String items;
+    //申请科室
     private String apply_departments;
+    //申请日期
     private Date apply_date;
+    //申请医生
     private String apply_doctor;
+    //检查所见
     private String examination_finding;
+    //印象
     private String impression;
+    //检查时间
     private Date inspection_time;
+    //报告时间
     private Date report_time;
+    //报告医生
     private String report_docto;
+    //审核医生
     private String audit_docto;
+    //类型
     private String type;
-    private int patient_id;
+    //病人id
+    private String patient_id;
+    //检查号
     private String check_no;
+    //医院机构
+    private String dept;
+    //报告名称
     private String name;
-    private String userid;
+    //状态
+    private int status;
+    //创建时间
+    private Date creation_time;
 
     public int getId() {
         return id;
@@ -25,6 +52,22 @@ public class Report {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getReport_id() {
+        return report_id;
+    }
+
+    public void setReport_id(String report_id) {
+        this.report_id = report_id;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getItems() {
@@ -115,11 +158,11 @@ public class Report {
         this.type = type;
     }
 
-    public int getPatient_id() {
+    public String getPatient_id() {
         return patient_id;
     }
 
-    public void setPatient_id(int patient_id) {
+    public void setPatient_id(String patient_id) {
         this.patient_id = patient_id;
     }
 
@@ -131,6 +174,14 @@ public class Report {
         this.check_no = check_no;
     }
 
+    public String getDept() {
+        return dept;
+    }
+
+    public void setDept(String dept) {
+        this.dept = dept;
+    }
+
     public String getName() {
         return name;
     }
@@ -139,11 +190,19 @@ public class Report {
         this.name = name;
     }
 
-    public String getUserid() {
-        return userid;
+    public int getStatus() {
+        return status;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Date getCreation_time() {
+        return creation_time;
+    }
+
+    public void setCreation_time(Date creation_time) {
+        this.creation_time = creation_time;
     }
 }

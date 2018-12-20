@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/css/font.css">
+    <link rel="stylesheet" href="../../static/css/weadmin.css">
+    <style>
+        .carImg{
+            margin: 10px 0;
+        }
+        .carImg>img{
+            width: 100%;
+            height: 350px;
+        }
+        .section-two-div{
+            border-radius: 10px;
+            box-sizing: border-box;
+            /*color: #fff;*/
+            margin-top: 7px;
+            cursor: pointer;
+            text-align: center;
+            float: left;
+            box-shadow: 0 1px 5px 0 rgba(0,0,0,.2);
+            /*background-color: #3385ff;*/
+            height: 134px;
+            margin-left: 1%;
+            font-size: 16px;
+            width: 9%;
+            padding: 1% 0;
+        }
+        .section-two-div img{
+            width: 60px;
+            display: inline-block;
+            margin-bottom: 8px;
+            height: 60px;
+        }
+        .car-top{
+            width: 100%;
+            overflow: auto;
+            height: 170px;
+        }
+        #Tu11,#Tu12,#Tu21,#Tu22,#Tu23,#Tu31,#Tu32,#Tu33,#Tu34,#Tu35,#Tu36,#Tu41,#Tu42,#Tu43,#Tu44,#Tu45{
+            width: 80px;
+            height: 80px;
+        }
+        .section-two-div-bg{
+            background-color: #f2f2f2;
+            /*border: 1px solid #cdcfdb;*/
+        }
+    </style>
+</head>
+<body>
+<!--<div class="weadmin-nav">-->
+			<!--<span class="layui-breadcrumb">-->
+        <!--<a href="">首页</a>-->
+        <!--<a href="">训练管理</a>-->
+        <!--<a>-->
+          <!--<cite>车操训练</cite></a>-->
+      <!--</span>-->
+    <!--<a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">-->
+        <!--<i class="layui-icon" style="line-height:30px">&#x1002;</i></a>-->
+<!--</div>-->
+<div class="weadmin-body">
+    <div class="car-top">
+        <div style="width: 100%">
+            <div class="section-two-div" data="carImg/百米障碍救助操.png">
+                <div><img src="img/百米障碍救助操.png"  alt=""></div>
+                <div>百米障碍救助操</div>
+            </div>
+            <div class="section-two-div" data="carImg/车辆事故处置救援操.png">
+                <div><img src="img/车辆事故处置救援操.png"  alt=""></div>
+                <div>车辆事故处置救援操</div>
+            </div>
+            <div class="section-two-div" data="carImg/初战快速出水控火操.png">
+                <div><img src="img/初战快速出水控火操.png"  alt=""></div>
+                <div>初战快速出水控火操</div>
+            </div>
+            <div class="section-two-div" data="carImg/两车三枪操.png">
+                <div><img src="img/两车三枪操.png"  alt=""></div>
+                <div>两车三枪操</div>
+            </div>
+            <div class="section-two-div" data="carImg/楼层火灾救人操.png">
+                <div><img src="img/楼层火灾救人操.png"  alt=""></div>
+                <div>楼层火灾救人操</div>
+            </div>
+            <div class="section-two-div" data="carImg/楼层火灾内攻操.png">
+                <div><img src="img/楼层火灾内攻操.png"  alt=""></div>
+                <div>楼层火灾内攻操</div>
+            </div>
+            <div class="section-two-div" data="carImg/百米障碍救助操.png">
+                <div><img src="img/攀登15米金属拉梯操.png"  alt=""></div>
+                <div>攀登15米金属拉梯操</div>
+            </div>
+            <div class="section-two-div" data="carImg/枪炮协同灭火操.png">
+                <div><img src="img/枪炮协同灭火操.png"  alt=""></div>
+                <div>枪炮协同灭火操</div>
+            </div>
+            <div class="section-two-div" data="carImg/纵深灭火救人操.png">
+                <div><img src="img/纵深灭火救人操.png"  alt=""></div>
+                <div>纵深灭火救人操</div>
+            </div>
+        </div>
+    </div>
+    <div class="carImg">
+        <img src="carImg/百米障碍救助操.png" alt="">
+    </div>
+    <table class="layui-table" id="memberList">
+        <colgroup>
+            <col width="80">
+            <col width="140">
+            <col width="140">
+
+        </colgroup>
+        <thead>
+        <tr>
+            <th>位置</th>
+            <th>能力分析图</th>
+            <th>姓名</th>
+            <th>擅长项目</th>
+            <th>耐力</th>
+            <th>速度</th>
+            <th>力量</th>
+            <th>技巧</th>
+            <th>BMI</th>
+
+        </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+
+</div>
+<script type="text/javascript" src="../../lib/layui/layui.all.js" charset="utf-8"></script>
+<script src="../../lib/layui/echart.js"></script>
+<script src="../../static/js/jquery-3.3.1.min.js"></script>
+<script src="../../static/gong.js"></script>
+<script src="../Healthy/js/list.js"></script>
+<script>
+
+    $(".section-two-div").click(function () {
+        $(".section-two-div").removeClass('section-two-div-bg')
+        $(this).addClass('section-two-div-bg')
+        // if($(this).attr('data-w')==undefined || $(this).attr('data-w')==0){
+        //     $(this).attr('data-w',1);
+        //     $(this).addClass('section-two-div-bg')
+        // }else {
+        //     $(this).attr('data-w',0);
+        //     $(this).removeClass('section-two-div-bg')
+        // }
+        $(".carImg>img").attr('src',$(this).attr('data'));
+        var num = $(this).index();
+        var arr=[];
+        if(num==0){
+            arr=[
+                {name:'李磊',id:'1#',class:'Tu11',f1:'70分',f2:'75分',f3:'75分',f4:'75分',f5:'75分',xm:'百米障碍救助操'},
+                {name:'孙东剑',id:'2#',class:'Tu12',f1:'72分',f2:'71分',f3:'85分',f4:'85分',f5:'77分',xm:'百米障碍救助操'},
+            ]
+            aaxx(arr);
+            tneng('Tu11');
+            tneng('Tu12');
+
+        }else if(num==1){
+            arr=[
+                {name:'李磊',id:'1#',class:'Tu21',f1:'70分',f2:'75分',f3:'75分',f4:'75分',f5:'75分',xm:'车辆事故处置救援操'},
+                {name:'孙东剑',id:'2#',class:'Tu22',f1:'72分',f2:'71分',f3:'85分',f4:'85分',f5:'77分',xm:'车辆事故处置救援操'},
+                {name:'孙运超',id:'3#',class:'Tu23',f1:'80分',f2:'75分',f3:'82分',f4:'81分',f5:'78分',xm:'车辆事故处置救援操'},
+            ]
+            aaxx(arr);
+            tneng('Tu21');
+            tneng('Tu22');
+            tneng('Tu23');
+
+        }else if(num==2){
+            arr=[
+                {name:'李磊',id:'1#',class:'Tu31',f1:'70分',f2:'75分',f3:'75分',f4:'75分',f5:'75分',xm:'初战快速出水控火操'},
+                {name:'孙东剑',id:'2#',class:'Tu32',f1:'72分',f2:'71分',f3:'85分',f4:'85分',f5:'77分',xm:'初战快速出水控火操'},
+                {name:'孙运超',id:'3#',class:'Tu33',f1:'80分',f2:'75分',f3:'82分',f4:'81分',f5:'78分',xm:'初战快速出水控火操'},
+                {name:'康三亚',id:'4#',class:'Tu34',f1:'81分',f2:'76分',f3:'84分',f4:'85分',f5:'74分',xm:'初战快速出水控火操'},
+                {name:'罗阿洲',id:'5#',class:'Tu35',f1:'83分',f2:'72分',f3:'80分',f4:'80分',f5:'75分',xm:'初战快速出水控火操'},
+                {name:'刘准生',id:'6#',class:'Tu36',f1:'82分',f2:'76分',f3:'83分',f4:'82分',f5:'79分',xm:'初战快速出水控火操'},
+            ]
+            aaxx(arr);
+            tneng('Tu31');
+            tneng('Tu32');
+            tneng('Tu33');
+            tneng('Tu34');
+            tneng('Tu35');
+            tneng('Tu36');
+
+        }else if(num==3){
+            arr=[
+                {name:'李磊',id:'1#',class:'Tu41',f1:'70分',f2:'75分',f3:'75分',f4:'75分',f5:'75分',xm:'两车三枪操'},
+                {name:'孙东剑',id:'2#',class:'Tu42',f1:'72分',f2:'71分',f3:'85分',f4:'85分',f5:'77分',xm:'两车三枪操'},
+                {name:'孙运超',id:'3#',class:'Tu43',f1:'80分',f2:'75分',f3:'82分',f4:'81分',f5:'78分',xm:'两车三枪操'},
+                {name:'康三亚',id:'4#',class:'Tu44',f1:'81分',f2:'76分',f3:'84分',f4:'85分',f5:'74分',xm:'两车三枪操'},
+                {name:'罗阿洲',id:'5#',class:'Tu45',f1:'83分',f2:'72分',f3:'80分',f4:'80分',f5:'75分',xm:'两车三枪操'},
+            ]
+            aaxx(arr);
+            tneng('Tu41');
+            tneng('Tu42');
+            tneng('Tu43');
+            tneng('Tu44');
+            tneng('Tu45');
+
+        }else {
+            aaxx(arr);
+        }
+
+
+    })
+    var arr=[
+        {name:'李磊',id:'1#',class:'Tu11',f1:'70分',f2:'75分',f3:'75分',f4:'75分',f5:'75分',xm:'百米障碍救助操'},
+        {name:'孙东剑',id:'2#',class:'Tu12',f1:'72分',f2:'71分',f3:'85分',f4:'85分',f5:'77分',xm:'百米障碍救助操'},
+    ]
+
+    aaxx(arr);
+    tneng('Tu11');
+    tneng('Tu12');
+
+
+    function aaxx(e){
+        var tbody='';
+        e.forEach(function (item,index) {
+            var html='';
+            var ss=name.split(",");
+            for (var i=index;i<ss.length;i++){
+                html+='<option style="layui-input" value="'+i+'" >'+ss[i]+'</option>';
+            }
+            var ssx=item.id+'';
+            tbody+='<tr >\n' +
+                '                <td>'+item.id+'</td>\n' +
+                '                <td><div id="'+item.class+'"></div></td>\n' +
+                '                <td>\n' +
+                '                        <select id="select"+item.id  data="'+item.id+'" onchange=tt($(this)) lay-verify="required" class="select" style="width: 100px;\n' +
+                '    height: 35px;\n' +
+                '    border: 1px solid #d3d3d8;">/n' +html+
+                '                        </select>\n' +
+                '\n' +
+                '                </td>\n' +
+                '                <td>'+item.xm+'</td>\n' +
+                '                <td class="f1">'+item.f1+'</td>\n' +
+                '                <td class="f2">'+item.f2+'</td>\n' +
+                '                <td class="f3">'+item.f3+'</td>\n' +
+                '                <td class="f4">'+item.f4+'</td>\n' +
+                '                <td class="f5">'+item.f5+'</td>\n' +
+                '            </tr>';
+        })
+        $("#tbody").html(tbody);
+
+    }
+
+    function tt(e){
+        var options=$("#select option:selected");
+        function aas(clas,es){
+            es.parent().parent().find(clas).html(Math.ceil(Math.random()*10) + 70 +'分')
+        }
+        aas('.f1',e)
+        aas('.f2',e)
+        aas('.f3',e)
+        aas('.f4',e)
+        aas('.f5',e)
+    }
+    //生成随机数
+    function sj(e) {
+        var num = (Math.random() * 10 + e).toFixed(1);
+        return num;
+    }
+
+    function tneng(id) {
+        var arr=[
+            {
+                value : [ sj(50), sj(40), sj(70), sj(60), sj(70)],
+                name : '10月份'
+            },
+            {
+                value :  [ sj(50), sj(40), sj(70), sj(60), sj(70)],
+                name : '11月份'
+            }
+        ];
+        var option = {
+            radar: {
+                name: {
+                    show:false,
+                },
+                indicator: [
+                    {name: '耐力', max: 100},
+                    {name: '速度', max: 100},
+                    {name: '力量', max: 100},
+                    {name: '技巧', max:  100},
+                    {name: 'BMI', max: 100}
+                ]
+            },
+            series: [{
+                name: '',
+                type: 'radar',
+                data : arr
+            }]
+        };
+        var myChart = echarts.init(document.getElementById(id));
+
+        myChart.setOption(option);
+    }
+</script>
+</body>
+</html>
