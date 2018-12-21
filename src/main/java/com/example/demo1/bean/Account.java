@@ -12,7 +12,7 @@ public class Account {
     //账号
     private String  username;
     //科目类型
-    private int type;
+    private String type;
     //状态
     private int status;
     //创建时间
@@ -57,11 +57,11 @@ public class Account {
         this.username = username;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

@@ -33,13 +33,7 @@
                 <div class="layui-card-header">检查报告
                     <div class="right" style="margin:1px 10px 0 0">
                         <div class="layui-inline">
-                            <input type="text" name="username" placeholder="请输入**" autocomplete="off" class="layui-input">
-                        </div>
-                        <div class="layui-inline">
-                            <input type="text" name="username" placeholder="请输入**" autocomplete="off" class="layui-input">
-                        </div>
-                        <div class="layui-inline">
-                            <input type="text" name="username" placeholder="请输入**" autocomplete="off" class="layui-input">
+                            <input type="text" name="username" placeholder="请输入查询病人姓名" autocomplete="off" class="layui-input">
                         </div>
                         <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
                         <!--<button class="layui-btn" onclick="WeAdminEdit('添加','basicResult.html', 1, 1100, 800)"><i-->
@@ -47,94 +41,52 @@
                         <!--</button>-->
                     </div>
                 </div>
-                <div class="layui-card-body ">
-                    <table class="layui-table" >
-                        <thead>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td colspan="2">检查科室：</td>
-                            <td colspan="2">检查号：</td>
-                        </tr>
-                        <tr>
-                            <td>姓名：</td>
-                            <td>性别：</td>
-                            <td>年龄：</td>
-                            <td>病人ID：</td>
-
-                        </tr>
-                        <tr>
-                            <td>申请科室：</td>
-                            <td>检查项目：</td>
-                            <td>申请日期：</td>
-                            <td>申请医生：</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                检查所见：<br/>
-                                印象：<br/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>检查时间：</td>
-                            <td>报告时间：</td>
-                            <td>报告医生：</td>
-                            <td>审核医生：</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="td-manage" onclick="WeAdminEdit('查看','../../../yy.html', 1, 1000, 600)">
-                                <a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:;" title="启用">查看</a>
-                            </td>
-                        </tr>
-
-                        </tbody>
-                    </table>
+                <div id="show">
                 </div>
+                <!--<div class="layui-card-body ">-->
+                    <!--<table class="layui-table" >-->
+                        <!--<thead>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--<tr>-->
+                            <!--<td colspan="2">检查科室：</td>-->
+                            <!--<td colspan="2">检查号：</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>姓名：</td>-->
+                            <!--<td>性别：</td>-->
+                            <!--<td>年龄：</td>-->
+                            <!--<td>病人ID：</td>-->
+
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>申请科室：</td>-->
+                            <!--<td>检查项目：</td>-->
+                            <!--<td>申请日期：</td>-->
+                            <!--<td>申请医生：</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td colspan="4">-->
+                                <!--检查所见：<br/>-->
+                                <!--印象：<br/>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>检查时间：</td>-->
+                            <!--<td>报告时间：</td>-->
+                            <!--<td>报告医生：</td>-->
+                            <!--<td>审核医生：</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td colspan="4" class="td-manage" onclick="WeAdminEdit('查看','../../../yy.html', 1, 1000, 600)">-->
+                                <!--<a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:;" title="启用">查看</a>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+
+                        <!--</tbody>-->
+                    <!--</table>-->
+                <!--</div>-->
                 <hr/>
-                <div class="layui-card-body ">
-                    <table class="layui-table" >
-                        <thead>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td colspan="2">检查科室：</td>
-                            <td colspan="2">检查号：</td>
-                        </tr>
-                        <tr>
-                            <td>姓名：</td>
-                            <td>性别：</td>
-                            <td>年龄：</td>
-                            <td>病人ID：</td>
-
-                        </tr>
-                        <tr>
-                            <td>申请科室：</td>
-                            <td>检查项目：</td>
-                            <td>申请日期：</td>
-                            <td>申请医生：</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                检查所见：<br/>
-                                印象：<br/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>检查时间：</td>
-                            <td>报告时间：</td>
-                            <td>报告医生：</td>
-                            <td>审核医生：</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="td-manage"
-                                onclick="WeAdminEdit('查看','../../../yy.html', 1, 1000, 600)">
-                                <a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:;" title="启用">查看</a>
-                            </td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
     </div>
@@ -142,5 +94,80 @@
 <script type="text/javascript" src="../../lib/layui/layui.all.js" charset="utf-8"></script>
 <script src="../../static/js/jquery-3.3.1.min.js"></script>
 <script src="list.js"></script>
+<script type="text/javascript">
+    var token='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJhY2NvdW50XCI6e1wiY3JlYXRpb25fdGltZVwiOjE1NDUyOTM4ODUwMDAsXCJpZFwiOjEsXCJwYXNzd29yZFwiOlwiYzgxZTcyOGQ5ZDRjMmY2MzZmMDY3Zjg5Y2MxNDg2MmNcIixcInN0YXR1c1wiOjEsXCJ0eXBlXCI6XCIxXCIsXCJ1c2VybmFtZVwiOlwiMVwifX0iLCJpc3MiOiJzc3RhIiwiZXhwIjoxNTQ1NDA4NDE3fQ.ACbQFMbAiOnYR81sQ5vEJzLci_j3ESA0DxPewsxzIOc';
+    var message={};
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost/index/show',//发送请求
+        data: {page: 1, size:5,token:token},
+        dataType: "html",
+        success: function (result) {
+            var res = JSON.parse(result);
+            console.log(res.message)
+            var users = res.message.list;
+            initUserList(users)
+        }
+    });
+
+
+    function initUserList(list){
+        layui.use('laytpl', function(){
+            var temp= demo.innerHTML;
+            layui.laytpl(temp).render({list:list},function(html){
+                show.innerHTML += html;
+            });
+        });
+    };
+
+</script>
+<script id="demo" type="text/html">
+    {{# layui.each(d.list,function(index,item){ }}
+    <div class="layui-card-body ">
+        <table class="layui-table" >
+            <thead>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="2">检查科室：{{item.type}}</td>
+                <td colspan="2">检查号：{{item.check_no}}</td>
+            </tr>
+            <tr>
+                <td>姓名：{{item.username}}</td>
+                <td>性别：{{0==item.sex?"男":"女"}}</td>
+                <td>年龄：{{item.age}}</td>
+                <td>病人ID：{{item.patient_id}}</td>
+
+            </tr>
+            <tr>
+                <td>申请科室：{{item.apply_departments}}</td>
+                <td>检查项目：{{item.items}}</td>
+                <td>申请日期：{{layui.util.toDateString(item.apply_date, 'yyyy-MM-dd HH:mm:ss')}}</td>
+                <td>申请医生：{{item.apply_doctor}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    检查所见：{{item.examination_finding}}<br/>
+                    印象：{{item.impression}}<br/>
+                </td>
+            </tr>
+            <tr>
+                <td>检查时间：{{layui.util.toDateString(item.inspection_time, 'yyyy-MM-dd HH:mm:ss')}}</td>
+                <td>报告时间：{{layui.util.toDateString(item.report_time, 'yyyy-MM-dd HH:mm:ss')}}</td>
+                <td>报告医生：{{item.report_docto}}</td>
+                <td>审核医生：{{item.audit_docto}}</td>
+            </tr>
+            <tr>
+                <td colspan="4" class="td-manage" onclick="WeAdminEdit('查看','../../../yy.html', 1, 1000, 600)">
+                    <a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:;" title="启用">查看</a>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <hr/>
+    {{# }); }}
+</script>
 </body>
 </html>

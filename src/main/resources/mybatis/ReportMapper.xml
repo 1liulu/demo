@@ -10,9 +10,9 @@
 		SELECT y_report.* ,y_patient.`name` AS username,y_patient.phone,y_patient.sex,y_patient.age
 		FROM y_report
 		LEFT JOIN y_patient ON(y_report.uid=y_patient.uid)
-		WHERE y_report.`status`=1
+		WHERE y_report.`status`=1	AND y_report.type=#{type}
 		<if test="username != null">
-			AND y_patient.`name`=#{username}
+			AND y_patient.`name` LIKE #{username}
 		</if>
 		ORDER BY creation_time DESC
 	</select>
