@@ -9,7 +9,6 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.demo1.bean.Account;
-import com.example.demo1.bean.User;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;

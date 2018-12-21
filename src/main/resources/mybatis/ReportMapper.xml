@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo1.mapper.ReportMapper">
+
+
+    <select id="findall" resultType="com.example.demo1.bean.Report" parameterType="com.example.demo1.bean.Report">
+		SELECT y_report.* ,y_patient.`name` AS username,y_patient.phone,y_patient.sex,y_patient.age
+		FROM y_report
+		LEFT JOIN y_patient ON(y_report.uid=y_patient.uid)
+		WHERE y_report.`status`=1
+		<if test="username != null">
+			AND y_patient.`name`=#{username}
+		</if>
+		ORDER BY creation_time DESC
+	</select>
+</mapper>

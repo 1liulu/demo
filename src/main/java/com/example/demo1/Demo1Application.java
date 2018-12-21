@@ -1,6 +1,6 @@
 package com.example.demo1;
-
-import com.github.pagehelper.*;
+import com.github.pagehelper.PageHelper;
+import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +14,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import java.util.Properties;
+
 
 @SpringBootApplication
 @MapperScan("com.example.demo1.mapper")
@@ -32,27 +33,30 @@ public class Demo1Application {
 
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
+		Interceptor[] plugins=  new Interceptor[]{pageHelper()};
+		sqlSessionFactoryBean.setPlugins(plugins);
 		sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mybatis/*.xml"));
 
 		return sqlSessionFactoryBean.getObject();
 	}
+	@Bean
+	PageHelper pageHelper(){
+		//分页插件
+		PageHelper pageHelper = new PageHelper();
+		Properties properties = new Properties();
+		properties.setProperty("reasonable", "true");
+		properties.setProperty("supportMethodsArguments", "true");
+		properties.setProperty("returnPageInfo", "check");
+		properties.setProperty("params", "count=countSql");
+		pageHelper.setProperties(properties);
 
+		return pageHelper;
+	}
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
 	}
 	//配置mybatis的分页插件pageHelper
-	@Bean
-	public PageHelper pageHelper(){
-		PageHelper pageHelper = new PageHelper();
-		Properties properties = new Properties();
-		properties.setProperty("offsetAsPageNum","true");
-		properties.setProperty("rowBoundsWithCount","true");
-		properties.setProperty("reasonable","true");
-		properties.setProperty("dialect","mysql");    //配置mysql数据库的方言
-		pageHelper.setProperties(properties);
-		return pageHelper;
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(Demo1Application.class, args);

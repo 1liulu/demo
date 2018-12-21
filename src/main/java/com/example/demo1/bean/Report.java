@@ -31,7 +31,7 @@ public class Report {
     private String report_docto;
     //审核医生
     private String audit_docto;
-    //类型
+    //科室类型
     private String type;
     //病人id
     private String patient_id;
@@ -45,6 +45,17 @@ public class Report {
     private int status;
     //创建时间
     private Date creation_time;
+
+    //Patient表关联
+    //手机号
+    private String phone;
+    //用户名
+    private String username;
+    //性别 0男1女
+    private int sex;
+    //年龄
+    private int age;
+
 
     public int getId() {
         return id;
@@ -204,5 +215,37 @@ public class Report {
 
     public void setCreation_time(Date creation_time) {
         this.creation_time = creation_time;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

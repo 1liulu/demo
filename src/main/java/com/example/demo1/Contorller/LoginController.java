@@ -5,8 +5,6 @@ import com.alibaba.fastjson.JSON;
 import com.example.demo1.bean.Account;
 import com.example.demo1.service.AccountService;
 import com.example.demo1.util.*;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 用户登录
+ */
 @RestController
 public class LoginController {
     @Autowired
@@ -37,6 +38,7 @@ public class LoginController {
         String password = Md5.MD5(pass);
         Account account = new Account();
         account.setUsername(username);
+        account.setStatus(Constant.STATUS_VALID);
         List<Account> accountList = accountService.accountList(account);
         if (null == accountList || accountList.size() != 1) {
             return MsgBuilder.buildReturnErrorMessage("用户不存在");

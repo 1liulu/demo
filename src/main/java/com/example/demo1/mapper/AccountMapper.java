@@ -1,7 +1,6 @@
 package com.example.demo1.mapper;
 
 import com.example.demo1.bean.Account;
-import com.example.demo1.bean.User;
 
 import java.util.List;
 

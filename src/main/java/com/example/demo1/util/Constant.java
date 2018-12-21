@@ -11,8 +11,16 @@ public class Constant {
 
     //token生成异常
     public final static String GENERATE_TOKEN_ERROR = "-1";
-
-
+    /**
+     * status状态
+     */
+    public static final int STATUS_VALID = 1;//有效
+    public static final int STATUS_INVALID = 0;//无效
+    /**
+     * 性别
+     */
+    public static final int SEX_MAN = 0;
+    public static final int SEX_WOMAN = 1;
 
 
     /**
@@ -55,7 +63,6 @@ public class Constant {
      */
     public static final String FILETYPE_PHOTO = "0";
     public static final String FILETYPE_VIDEO = "1";
-
 
     /**
      * stream去重强化方法
