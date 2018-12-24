@@ -502,6 +502,24 @@
 <script src="__TMPL__/public/js/dialogPolyfill.js"></script>
 <script src="__TMPL__/public/js/socket.io-1.1.0.js"></script>
 <script type="text/javascript">
+    var parents=parent.parent.window.location.search;//父页面的参数
+    var para=window.location.search;//当前请求的url的参数部分
+    var id;
+    var parentstoken;
+    //返回上一个页面
+    if(para==''){
+        parent.location.href = 'yiyuan/pages/index/index.html'
+    }
+    //返回登录页面
+    if (parents == '') {
+        parent.parent.location.href = 'yiyuan/pages/index/login.html'
+    }
+
+    id=para.split("?")[1];
+    parentstoken = parents.split("?")[1];
+
+    console.log(id)
+    console.log(parentstoken)
     function adjustLayout() {
         var width = $(window).width();
         var height = $(window).height();
@@ -515,7 +533,7 @@
         adjustLayout();
         $(window).resize(adjustLayout);
 
-        loadData();
+        loadData(id,parentstoken);
     });
 </script>
 <script>
@@ -534,13 +552,18 @@
     var currentImageViewer = null;
     var isShowingSeriesNav = true;
     var res = null;
-
-    function loadData() {
+    function loadData(id,token) {
         $.ajax({
-            url: "1.json", // 请求目标
-            type: "GET", // 请求类型 POST 或者 GET(默认)
+            url: "http://localhost/index/image", // 请求目标
+            type: "POST", // 请求类型 POST 或者 GET(默认)
+            data: {id: id, token:token},
             success: function (res) {
-
+                if (!res.retCode==0){
+                    parent.location.href = 'yiyuan/pages/index/index.html'
+                    return false;
+                }
+                res=res.message
+                console.log(res)
                 study = res.result;
                 for (var i = 0; i < study.series.length; i++) {
                     if (study.series[i].series_description == '' || study.series[i].series_description == null) study.series[i].series_description = 'N/A';

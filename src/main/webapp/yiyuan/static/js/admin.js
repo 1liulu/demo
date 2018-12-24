@@ -340,7 +340,6 @@ layui.define(['jquery', 'form', 'layer', 'element'], function(exports) {
 	}
 	/*弹出层+传递ID参数*/
 	window.WeAdminEdit = function(title, url, id, w, h) {
-        console.log(url);
 		if(title == null || title == '') {
 			title = false;
 		};
