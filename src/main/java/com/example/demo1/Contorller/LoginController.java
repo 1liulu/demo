@@ -61,19 +61,5 @@ public class LoginController {
         return MsgBuilder.buildReturnMessage(rtnMap);
     }
 
-//    @RequestMapping(value = "/l")
-//    public Map l() {
-//        //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
-//        PageHelper.startPage(1, 10);
-//        Account account = new Account();
-//        account.setUsername("1");
-//        List<Account> accountList = accountService.accountList(account);
-//
-//        PageInfo<Account> pageInfo = new PageInfo<Account>(accountList);
-//
-//
-//        return MsgBuilder.buildReturnMessage(pageInfo);
-//    }
-
 
 }

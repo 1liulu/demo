@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSON;
 import com.example.demo1.bean.Account;
 import com.example.demo1.bean.Report;
 import com.example.demo1.service.ReportService;
-import com.example.demo1.service.TokenService;
 import com.example.demo1.util.MsgBuilder;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,8 +23,15 @@ import java.util.Map;
 public class IndexController {
     @Autowired
     ReportService reportService;
-    @Autowired
-    TokenService tokenService;
+
+    /**
+     * 查看列表
+     * @param page
+     * @param size
+     * @param name
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/show")
     public Map show(String page, String size, String name, HttpServletRequest request) {
         Integer pageNum = 1;
@@ -48,6 +54,11 @@ public class IndexController {
         return MsgBuilder.buildReturnMessage(pageInfo);
     }
 
+    /**
+     * 查看病例图片
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/image")
     public Map image(int id) {
         String map = "{\n" +
