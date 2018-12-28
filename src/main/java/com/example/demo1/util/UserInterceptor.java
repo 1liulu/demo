@@ -17,9 +17,9 @@ public class UserInterceptor implements HandlerInterceptor {
     private static final String urlMatcher = "\\S*(login)S*$";
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        logger.info("Begin Crawling, Good Luck!");
-        System.out.println(httpServletRequest.getRequestURL());
-        System.out.println(httpServletRequest.getQueryString());
+   //     logger.info("Begin Crawling, Good Luck!");
+//        System.out.println(httpServletRequest.getRequestURL());
+//        System.out.println(httpServletRequest.getQueryString());
         //跨域访问设置
         httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, GET,OPTIONS");
