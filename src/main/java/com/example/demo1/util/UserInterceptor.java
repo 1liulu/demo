@@ -10,11 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class UserInterceptor implements HandlerInterceptor {
-    private static final String urlMatcher = "\\S*(login|swagger-ui.html|.gif|.jpg|.png|.jpeg|.bmp|.ico|.mp4|.mpeg|.mpg|.mpeg-1|.mpeg-2|.mpeg-4)S*$";
+    final Logger logger = Logger.getLogger("org.jediael.crawl.MyCrawler");
+    private static final String urlMatcher = "\\S*(login)S*$";
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        logger.info("Begin Crawling, Good Luck!");
+        System.out.println(httpServletRequest.getRequestURL());
+        System.out.println(httpServletRequest.getQueryString());
         //跨域访问设置
         httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, GET,OPTIONS");

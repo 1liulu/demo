@@ -11,5 +11,6 @@ public interface ReportMapper {
      * @return
      */
     public List<Report> findall(Report report);
-
+    public int addreport(Report report);
+    public int updatereport(Report report);
 }

@@ -15,4 +15,10 @@ public class ReportService {
         List<Report> reportList=reportMapper.findall(report);
         return reportList;
     }
+    public int addreport(Report report){
+        return reportMapper.addreport(report);
+    }
+    public int updatereport(Report report){
+        return  reportMapper.updatereport(report);
+    }
 }

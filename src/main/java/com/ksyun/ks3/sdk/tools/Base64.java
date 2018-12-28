@@ -1786,7 +1786,7 @@ public class Base64 {
     /* ******** I N N E R C L A S S I N P U T S T R E A M ******** */
 
     /**
-     * A {@link Base64.InputStream} will read data from another
+     * A {@link InputStream} will read data from another
      * <tt>java.io.InputStream</tt>, given in the constructor, and encode/decode
      * to/from Base64 notation on the fly.
      *
@@ -1806,7 +1806,7 @@ public class Base64 {
         private byte[] decodabet; // Local copies to avoid extra method calls
 
         /**
-         * Constructs a {@link Base64.InputStream} in DECODE mode.
+         * Constructs a {@link InputStream} in DECODE mode.
          *
          * @param in
          *            the <tt>java.io.InputStream</tt> from which to read data.
@@ -1817,7 +1817,7 @@ public class Base64 {
         } // end constructor
 
         /**
-         * Constructs a {@link Base64.InputStream} in either ENCODE or DECODE
+         * Constructs a {@link InputStream} in either ENCODE or DECODE
          * mode.
          * <p>
          * Valid options:
@@ -1998,7 +1998,7 @@ public class Base64 {
     /* ******** I N N E R C L A S S O U T P U T S T R E A M ******** */
 
     /**
-     * A {@link Base64.OutputStream} will write data to another
+     * A {@link OutputStream} will write data to another
      * <tt>java.io.OutputStream</tt>, given in the constructor, and
      * encode/decode to/from Base64 notation on the fly.
      *
@@ -2019,7 +2019,7 @@ public class Base64 {
         private byte[] decodabet; // Local copies to avoid extra method calls
 
         /**
-         * Constructs a {@link Base64.OutputStream} in ENCODE mode.
+         * Constructs a {@link OutputStream} in ENCODE mode.
          *
          * @param out
          *            the <tt>java.io.OutputStream</tt> to which data will be
@@ -2031,7 +2031,7 @@ public class Base64 {
         } // end constructor
 
         /**
-         * Constructs a {@link Base64.OutputStream} in either ENCODE or DECODE
+         * Constructs a {@link OutputStream} in either ENCODE or DECODE
          * mode.
          * <p>
          * Valid options:

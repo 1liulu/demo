@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo1.mapper.PatientMapper">
+
+    <select id="findbyuid" parameterType="com.example.demo1.bean.Patient" resultType="com.example.demo1.bean.Patient">
+		SELECT * FROM y_patient WHERE uid=#{uid} AND status=#{status}
+	</select>
+    <insert id="addpatient" parameterType="com.example.demo1.bean.Patient">
+		INSERT INTO  y_patient(phone,status,name,sex,age,uid,creation_time)
+		VALUE(#{phone},#{status},#{name},#{sex},#{age},#{uid},#{creation_time})
+	</insert>
+</mapper>

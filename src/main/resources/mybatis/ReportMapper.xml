@@ -14,6 +14,21 @@
 		<if test="username != null">
 			AND y_patient.`name` LIKE #{username}
 		</if>
+		<if test="report_id != null">
+			AND y_report.report_id=#{report_id}
+		</if>
 		ORDER BY creation_time DESC
 	</select>
+	<insert id="addreport" parameterType="com.example.demo1.bean.Report">
+		INSERT INTO y_report(items,apply_departments,apply_date,apply_doctor,examination_finding,impression,inspection_time,report_time,report_docto,
+		audit_docto,type,patient_id,check_no,name,status,creation_time,dept,uid,report_id)
+		VALUE(#{items},#{apply_departments},#{apply_date},#{apply_doctor},#{examination_finding},#{impression},#{inspection_time},#{report_time},#{report_docto},
+		#{audit_docto},#{type},#{patient_id},#{check_no},#{name},#{status},#{creation_time},#{dept},#{uid},#{report_id})
+	</insert>
+	<update id="updatereport" parameterType="com.example.demo1.bean.Report">
+		UPDATE y_report SET items=#{items},apply_departments=#{apply_departments},apply_date=#{apply_date},apply_doctor=#{apply_doctor},examination_finding=#{examination_finding},
+		impression=#{impression},inspection_time=#{inspection_time},report_time=#{report_time},report_docto=#{report_docto},audit_docto=#{audit_docto},type=#{type},patient_id=#{patient_id},
+		check_no=#{check_no},name=#{name},status=#{status},creation_time=#{creation_time},dept=#{dept},uid=#{uid}
+		WHERE report_id=#{report_id} AND `status`=1
+	</update>
 </mapper>
