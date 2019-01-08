@@ -50,7 +50,7 @@
             $.ajax({
                 type: 'POST',
                 url: 'http://localhost:80/login',//发送请求
-                data: {name: data.field.username, pass: data.field.password},
+                data: {name: data.field.username, pass: data.field.password,type:2},
                 dataType: "html",
                 success: function (result) {
                     var res = JSON.parse(result);

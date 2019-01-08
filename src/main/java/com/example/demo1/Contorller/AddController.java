@@ -23,11 +23,12 @@ public class AddController {
     ReportService reportService;
     @Autowired
     PatientService patientService;
+
     @RequestMapping(value = "/addreport")
     public Map add(String report_id, String uid, String age, String sex, String username, String phone,
                    String items, String apply_departments, String apply_date, String apply_doctor, String examination_finding, String impression,
                    String inspection_time, String report_time, String report_docto, String audit_docto, String type, String patient_id,
-                   String check_no,String name,String dept) {
+                   String check_no, String name, String dept) {
         if (StringUtils.isBlank(report_id)) {
             return MsgBuilder.buildReturnErrorMessage("");
         }
@@ -111,6 +112,8 @@ public class AddController {
         report.setDept(dept);
         report.setUid(uid);
         report.setReport_id(report_id);
+        //暂时内科
+        report.setDepartments(Constant.WITHIN);
         if (reportList == null || reportList.size() == 0) {
             //没有 添加
             //查看该病人是否在数据库中

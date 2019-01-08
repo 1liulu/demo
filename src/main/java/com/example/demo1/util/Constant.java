@@ -21,6 +21,11 @@ public class Constant {
      */
     public static final int SEX_MAN = 0;
     public static final int SEX_WOMAN = 1;
+    /**
+     * 科室 0内科1外科
+     */
+    public static final int WITHIN = 0;
+    public static final int OUTER = 1;
 
 
     /**

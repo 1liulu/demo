@@ -57,6 +57,17 @@ public class Report {
     private int age;
 
 
+    //申请科室    0内科1外科
+    private int departments;
+
+    public int getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(int departments) {
+        this.departments = departments;
+    }
+
     public int getId() {
         return id;
     }

@@ -10,7 +10,10 @@
 		SELECT y_report.* ,y_patient.`name` AS username,y_patient.phone,y_patient.sex,y_patient.age
 		FROM y_report
 		LEFT JOIN y_patient ON(y_report.uid=y_patient.uid)
-		WHERE y_report.`status`=1	AND y_report.type=#{type}
+		WHERE y_report.`status`=1
+		<if test="type !=5">
+			AND y_report.type=#{type}
+		</if>
 		<if test="username != null">
 			AND y_patient.`name` LIKE #{username}
 		</if>
@@ -21,14 +24,41 @@
 	</select>
 	<insert id="addreport" parameterType="com.example.demo1.bean.Report">
 		INSERT INTO y_report(items,apply_departments,apply_date,apply_doctor,examination_finding,impression,inspection_time,report_time,report_docto,
-		audit_docto,type,patient_id,check_no,name,status,creation_time,dept,uid,report_id)
+		audit_docto,type,patient_id,check_no,name,status,creation_time,dept,uid,report_id,departments)
 		VALUE(#{items},#{apply_departments},#{apply_date},#{apply_doctor},#{examination_finding},#{impression},#{inspection_time},#{report_time},#{report_docto},
-		#{audit_docto},#{type},#{patient_id},#{check_no},#{name},#{status},#{creation_time},#{dept},#{uid},#{report_id})
+		#{audit_docto},#{type},#{patient_id},#{check_no},#{name},#{status},#{creation_time},#{dept},#{uid},#{report_id},#{departments})
 	</insert>
 	<update id="updatereport" parameterType="com.example.demo1.bean.Report">
 		UPDATE y_report SET items=#{items},apply_departments=#{apply_departments},apply_date=#{apply_date},apply_doctor=#{apply_doctor},examination_finding=#{examination_finding},
 		impression=#{impression},inspection_time=#{inspection_time},report_time=#{report_time},report_docto=#{report_docto},audit_docto=#{audit_docto},type=#{type},patient_id=#{patient_id},
-		check_no=#{check_no},name=#{name},status=#{status},creation_time=#{creation_time},dept=#{dept},uid=#{uid}
+		check_no=#{check_no},name=#{name},status=#{status},creation_time=#{creation_time},dept=#{dept},uid=#{uid},departments=#{departments}
 		WHERE report_id=#{report_id} AND `status`=1
 	</update>
+	<select id="countnumber" resultType="int">
+		SELECT COUNT(*) FROM y_report
+		WHERE DATE(creation_time)=DATE(NOW()) AND `status`=1
+	</select>
+	<select id="tadaycountsex" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM y_report
+		INNER JOIN y_patient ON(y_report.uid=y_patient.uid)
+		WHERE DATE(y_report.creation_time)=DATE(NOW()) AND y_patient.sex=#{0} AND y_report.`status`=1
+	</select>
+	<select id="yesterdaycountsex" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM y_report
+		INNER JOIN y_patient ON(y_report.uid=y_patient.uid)
+		WHERE DATE(y_report.creation_time)=date_sub(curdate(),interval 1 day) AND y_patient.sex=#{0} AND y_report.`status`=1
+	</select>
+	<select id="tadaycountdepartments" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM y_report
+		WHERE DATE(creation_time)=DATE(NOW()) AND departments=#{0} AND `status`=1
+	</select>
+	<select id="findalls" resultType="com.example.demo1.bean.Report">
+		SELECT y_report.* ,y_patient.`name` AS username,y_patient.phone,y_patient.sex,y_patient.age
+		FROM y_report
+		LEFT JOIN y_patient ON(y_report.uid=y_patient.uid)
+		WHERE DATE(y_report.creation_time)=DATE(NOW()) AND y_report.`status`=1
+	</select>
 </mapper>

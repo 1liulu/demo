@@ -30,8 +30,8 @@ public class LoginController {
      * @return
      */
     @RequestMapping(value = "/login")
-    public Map login(String name, String pass) {
-        if (StringUtils.isBlank(name) || StringUtils.isBlank(pass)) {
+    public Map login(String name, String pass,String type) {
+        if (StringUtils.isBlank(name) || StringUtils.isBlank(pass)||StringUtils.isBlank(type)) {
             return MsgBuilder.buildReturnErrorMessage("用户名或密码不能为空");
         }
         String username = name;
@@ -39,6 +39,7 @@ public class LoginController {
         Account account = new Account();
         account.setUsername(username);
         account.setStatus(Constant.STATUS_VALID);
+        account.setAccount_type(Integer.parseInt(type));
         List<Account> accountList = accountService.accountList(account);
         if (null == accountList || accountList.size() != 1) {
             return MsgBuilder.buildReturnErrorMessage("用户不存在");
@@ -60,6 +61,5 @@ public class LoginController {
         }});
         return MsgBuilder.buildReturnMessage(rtnMap);
     }
-
 
 }

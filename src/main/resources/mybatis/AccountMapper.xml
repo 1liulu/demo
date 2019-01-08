@@ -7,6 +7,6 @@
    
 
 	<select id="findbyusername" parameterType="com.example.demo1.bean.Account" resultType="com.example.demo1.bean.Account">
-		SELECT * FROM y_account WHERE username=#{username} AND status=#{status}
+		SELECT * FROM y_account WHERE username=#{username} AND status=#{status} AND account_type=#{account_type}
 	</select>
    </mapper>

@@ -17,6 +17,17 @@ public class Account {
     private int status;
     //创建时间
     private Date creation_time;
+    //账号类型   1总后台2医生后台
+    private int account_type;
+
+    public int getAccount_type() {
+        return account_type;
+    }
+
+    public void setAccount_type(int account_type) {
+        this.account_type = account_type;
+    }
+
     public int getId() {
         return id;
     }
