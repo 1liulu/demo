@@ -18,5 +18,28 @@
         <if test="name != null">
             AND name LIKE #{name}
         </if>
+        ORDER BY creation_time DESC
     </select>
+    <select id="findbyid"  parameterType="com.example.demo1.bean.User" resultType="com.example.demo1.bean.User">
+        SELECT * FROM y_user
+        WHERE id=#{id} AND `status`=1 AND type=#{type}
+    </select>
+    <select id="finbyphone" parameterType="com.example.demo1.bean.User" resultType="com.example.demo1.bean.User">
+        SELECT id FROM y_user
+        WHERE phone=#{phone} AND `status`=1 AND type=#{type}
+        <if test="id != 0">
+            AND id!=#{id}
+        </if>
+    </select>
+    <insert id="addDoctor" parameterType="com.example.demo1.bean.User" >
+        INSERT INTO  y_user(phone,status,type,password,creation_time,name)
+		VALUE(#{phone},#{status},#{type},#{password},#{creation_time},#{name})
+    </insert>
+    <update id="updateDoctor" parameterType="com.example.demo1.bean.User">
+        update  y_user SET name=#{name},phone=#{phone}
+        WHERE id=#{id}
+    </update>
+    <update id="deleteDoctor" parameterType="int">
+        update  y_user SET `status`=0 WHERE id=#{0}
+    </update>
 </mapper>

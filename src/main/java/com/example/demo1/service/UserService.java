@@ -37,4 +37,49 @@ public class UserService {
     public List<User> finall(User user){
         return userMapper.finall(user);
     }
+
+    /**
+     * 查询用户
+
+     * @return
+     */
+    public User finbyid(User user){
+        return userMapper.findbyid(user);
+    }
+
+    /**
+     * 查找手机号是否存在  id！=0时查找除id=？有没有手机号存在
+     * @param user
+     * @return
+     */
+    public User finbyphone(User user){
+        return userMapper.finbyphone(user);
+    }
+
+    /**
+     * 添加医生账户
+     * @param user
+     * @return
+     */
+    public int addDoctor(User user){
+        return userMapper.addDoctor(user);
+    }
+
+    /**
+     * 修改医生账户
+     * @param user
+     * @return
+     */
+    public int updateDoctor(User user){
+        return userMapper.updateDoctor(user);
+    }
+
+    /**
+     * 删除账号
+     * @param id
+     * @return
+     */
+    public int deleteDoctor(int id){
+        return userMapper.deleteDoctor(id);
+    }
 }

@@ -3,15 +3,16 @@ package com.example.demo1.Contorller;
 
 import com.alibaba.fastjson.JSON;
 import com.example.demo1.bean.Account;
+import com.example.demo1.bean.Patient;
 import com.example.demo1.bean.Report;
-import com.example.demo1.bean.User;
+import com.example.demo1.bean.Userimage;
+import com.example.demo1.service.PatientService;
 import com.example.demo1.service.ReportService;
 import com.example.demo1.service.UserService;
 import com.example.demo1.util.Constant;
 import com.example.demo1.util.MsgBuilder;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.regexp.internal.RE;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,9 +33,11 @@ public class IndexController {
     ReportService reportService;
     @Autowired
     UserService userService;
+    @Autowired
+    PatientService patientService;
 
     /**
-     * 查看列表
+     * 查看检查报告列表
      *
      * @param page
      * @param size
@@ -67,13 +70,10 @@ public class IndexController {
         PageInfo<Report> pageInfo = new PageInfo<>(reportList);
         return MsgBuilder.buildReturnMessage(pageInfo);
     }
-    @RequestMapping(value = "/doctorfinall")
-    public Map doctorfinall(String page, String size,String type,String name,HttpServletRequest request){
-        if (StringUtils.isBlank(type)) {
-            return MsgBuilder.buildReturnErrorMessage("访问受限制");
-        }
+    @RequestMapping(value = "/userimage")
+    public Map userimage(String phone,String name,String uid,String page, String size){
         Integer pageNum = 1;
-        Integer pageSize = 1;
+        Integer pageSize = 10;
         if (!StringUtils.isBlank(page)) {
             pageNum = Integer.parseInt(page);
         }
@@ -81,13 +81,37 @@ public class IndexController {
             pageSize = Integer.parseInt(size);
         }
         PageHelper.startPage(pageNum, pageSize);
-        User user=new User();
+        Patient patient = new Patient();
         if (!StringUtils.isBlank(name)) {
-            user.setName("%" + name + "%");
+            patient.setName("%" + name + "%");
         }
-        user.setType(Integer.parseInt(type));
-        List<User> userList =userService.finall(user);
-        PageInfo<User> pageInfo = new PageInfo<>(userList);
+        if (!StringUtils.isBlank(phone)) {
+            patient.setPhone("%" + phone + "%");
+        }
+        if (!StringUtils.isBlank(uid)) {
+            patient.setUid(uid);
+        }
+        List<Userimage> patientList=patientService.findall(patient);
+        PageInfo<Userimage> pageInfo = new PageInfo<>(patientList);
+        if(patientList.size()==0){
+            return MsgBuilder.buildReturnMessage(pageInfo);
+            //没有病人检查报告
+        }
+        List<Report> reportList=reportService.fingbyuid(patientList);
+        Map<String, Userimage> map = new HashMap<>();
+        patientList.stream().forEach(list ->{
+            map.put(list.getUid(),list);
+        } );
+        reportList.stream().forEach(list -> {
+            Userimage userimage=map.get(list.getUid());
+            if(userimage.getReportList()==null){
+                List<Report> reportList1=new ArrayList<Report>();
+                reportList1.add(list);
+                map.get(list.getUid()).setReportList(reportList1);
+            }else{
+                map.get(list.getUid()).getReportList().add(list);
+            }
+        });
         return MsgBuilder.buildReturnMessage(pageInfo);
     }
     /**
@@ -179,6 +203,7 @@ public class IndexController {
     }
 
     /**
+     * 首页统计1
      * @return
      */
     @RequestMapping(value = "/inspection1")
@@ -195,6 +220,7 @@ public class IndexController {
     }
 
     /**
+     * 首页统计2
      * @return
      */
     @RequestMapping(value = "/inspection2")
@@ -221,6 +247,10 @@ public class IndexController {
         return MsgBuilder.buildReturnMessage(map);
     }
 
+    /**
+     * 首页统计3
+     * @return
+     */
     @RequestMapping(value = "/inspection3")
     public Map inspection3() {
         List<Report> reportList = reportService.findalls();
@@ -424,6 +454,10 @@ public class IndexController {
         return MsgBuilder.buildReturnMessage(map);
     }
 
+    /**
+     * 首页统计4
+     * @return
+     */
     @RequestMapping(value = "/inspection4")
     public Map inspection4() {
         List<Report> reportList = reportService.findalls();

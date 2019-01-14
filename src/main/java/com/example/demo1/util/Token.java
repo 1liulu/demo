@@ -22,11 +22,11 @@ public class Token {
     /**
      * 发行者
      */
-    public static final String ISSUSER = "ssta";
+    public static final String ISSUSER = "yixing";
     /**
      * 密令
      */
-    public static final String SECRET = "smartcityxfzhzxgl";
+    public static final String SECRET = "demo";
 
     /**
      * token有效期时长：8小时

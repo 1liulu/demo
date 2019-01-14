@@ -61,4 +61,14 @@
 		LEFT JOIN y_patient ON(y_report.uid=y_patient.uid)
 		WHERE DATE(y_report.creation_time)=DATE(NOW()) AND y_report.`status`=1
 	</select>
+	<select id="fingbyuid" parameterType="java.util.List" resultType="com.example.demo1.bean.Report">
+		SELECT * FROM y_report
+		WHERE status=1 AND uid IN
+		<foreach item="item" index="index" collection="list"
+				 open="(" separator="," close=")">
+			#{item.uid}
+		</foreach>
+
+		ORDER BY creation_time DESC
+	</select>
 </mapper>

@@ -2,6 +2,7 @@ package com.example.demo1.mapper;
 
 
 import com.example.demo1.bean.Report;
+import com.example.demo1.bean.Userimage;
 
 import java.util.List;
 
@@ -58,4 +59,10 @@ public interface ReportMapper {
      * @return
      */
     public List<Report> findalls();
+
+    /**
+     * 根据病人id查找检查报告
+     * @return
+     */
+    public List<Report> fingbyuid(List<Userimage> list);
 }

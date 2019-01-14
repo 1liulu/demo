@@ -17,6 +17,11 @@ public class Constant {
     public static final int STATUS_VALID = 1;//有效
     public static final int STATUS_INVALID = 0;//无效
     /**
+     * 支付状态
+     */
+    public static final int PAY = 1;//支付
+    public static final int NO_PAY = 0;//未支付
+    /**
      * 性别
      */
     public static final int SEX_MAN = 0;
@@ -27,19 +32,14 @@ public class Constant {
     public static final int WITHIN = 0;
     public static final int OUTER = 1;
 
+    /**
+     * 1是用户，2是医生，3是专家
+     */
+    public static final int TYPE_USER=1;
+    public static final int TYPE_DOCTOR=2;
+    public static final int TYPE_SPECIALIST=3;
 
-    /**
-     * 学习资料训练指导
-     */
-    public static final int GUIDANCE = 40;
-    /**
-     * 学习知识
-     */
-    public static final int KNOWLEDGE = 41;
-    /**
-     * 训练记录
-     */
-    public static final int RECORD = 42;
+
 
     /**
      * 请求响应状态

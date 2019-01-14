@@ -12,4 +12,18 @@
 		INSERT INTO  y_patient(phone,status,name,sex,age,uid,creation_time)
 		VALUE(#{phone},#{status},#{name},#{sex},#{age},#{uid},#{creation_time})
 	</insert>
+	<select id="findall" parameterType="com.example.demo1.bean.Patient" resultType="com.example.demo1.bean.Userimage">
+		SELECT * FROM y_patient
+		WHERE status=1
+		<if test="name != null">
+			AND `name` LIKE #{name}
+		</if>
+		<if test="uid != null">
+			AND uid=#{uid}
+		</if>
+		<if test="phone != null">
+			AND phone LIKE #{phone}
+		</if>
+		ORDER BY creation_time DESC
+	</select>
 </mapper>

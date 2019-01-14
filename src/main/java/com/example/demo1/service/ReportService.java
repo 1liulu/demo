@@ -1,6 +1,7 @@
 package com.example.demo1.service;
 
 import com.example.demo1.bean.Report;
+import com.example.demo1.bean.Userimage;
 import com.example.demo1.mapper.ReportMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,5 +82,14 @@ public class ReportService {
      */
     public List<Report> findalls(){
         return reportMapper.findalls();
+    }
+
+    /**
+     * 根据病人id查找检查报告
+     * @param uid
+     * @return
+     */
+    public List<Report> fingbyuid(List<Userimage> list){
+        return reportMapper.fingbyuid(list);
     }
 }
