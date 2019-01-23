@@ -32,11 +32,19 @@
         </if>
     </select>
     <insert id="addDoctor" parameterType="com.example.demo1.bean.User" >
-        INSERT INTO  y_user(phone,status,type,password,creation_time,name)
-		VALUE(#{phone},#{status},#{type},#{password},#{creation_time},#{name})
+        INSERT INTO  y_user(phone,status,type,password,creation_time,name,classify)
+		VALUE(#{phone},#{status},#{type},#{password},#{creation_time},#{name},#{classify})
+    </insert>
+    <insert id="addSpecia" parameterType="com.example.demo1.bean.User">
+        INSERT INTO  y_user(phone,status,type,password,creation_time,name,classify)
+		VALUE(#{phone},#{status},#{type},#{password},#{creation_time},#{name},#{classify})
     </insert>
     <update id="updateDoctor" parameterType="com.example.demo1.bean.User">
-        update  y_user SET name=#{name},phone=#{phone}
+        update  y_user SET name=#{name},phone=#{phone},classify=#{classify}
+        WHERE id=#{id}
+    </update>
+    <update id="updateSpecia" parameterType="com.example.demo1.bean.User">
+        update  y_user SET name=#{name},phone=#{phone},classify=#{classify}
         WHERE id=#{id}
     </update>
     <update id="deleteDoctor" parameterType="int">

@@ -46,6 +46,13 @@ public interface UserMapper {
     public int addDoctor(User user);
 
     /**
+     * 添加专家账户
+     * @param user
+     * @return
+     */
+    public int addSpecia(User user);
+
+    /**
      * 修改医生账户
      * @param user
      * @return
@@ -53,7 +60,14 @@ public interface UserMapper {
     public int updateDoctor(User user);
 
     /**
-     * 删除账号
+     * 修改专家账户
+     * @param user
+     * @return
+     */
+    public int updateSpecia(User user);
+
+    /**
+     * 删除专家、医生账号
      * @param id
      * @return
      */

@@ -20,6 +20,15 @@ public class User {
     private int pid;
     private Date creation_time;
     private String name;
+    private int classify;
+
+    public int getClassify() {
+        return classify;
+    }
+
+    public void setClassify(int classify) {
+        this.classify = classify;
+    }
 
     public String getName() {
         return name;

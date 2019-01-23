@@ -66,12 +66,30 @@ public class UserService {
     }
 
     /**
+     * 添加医生账户
+     * @param user
+     * @return
+     */
+    public int addSpecia(User user) {
+        return userMapper.addSpecia(user);
+    }
+
+    /**
      * 修改医生账户
      * @param user
      * @return
      */
     public int updateDoctor(User user){
         return userMapper.updateDoctor(user);
+    }
+
+    /**
+     * 修改专家账户
+     * @param user
+     * @return
+     */
+    public int updateSpecia(User user) {
+        return userMapper.updateSpecia(user);
     }
 
     /**

@@ -1,6 +1,8 @@
 package com.example.demo1.Contorller;
 
+import com.example.demo1.bean.Dept;
 import com.example.demo1.bean.User;
+import com.example.demo1.service.DeptService;
 import com.example.demo1.service.UserService;
 import com.example.demo1.util.Constant;
 import com.example.demo1.util.Md5;
@@ -22,7 +24,8 @@ import java.util.Map;
 public class DoctorController {
     @Autowired
     UserService userService;
-
+    @Autowired
+    DeptService deptService;
     /**
      * 查询所有医生账号
      * @param page
@@ -57,9 +60,12 @@ public class DoctorController {
      * @return
      */
     @RequestMapping(value = "/doctorParticulars")
-    public Map doctorParticulars(String id){
+    public Map doctorParticulars(String id,String type){
         if (StringUtils.isBlank(id)) {
             return MsgBuilder.buildReturnErrorMessage("访问受限制");
+        }
+        if (StringUtils.isBlank(type)) {
+            return MsgBuilder.buildReturnErrorMessage("类型不能为空");
         }
         User users=new User();
         users.setId(Integer.parseInt(id));
@@ -69,7 +75,10 @@ public class DoctorController {
             return MsgBuilder.buildReturnErrorMessage("找不到相应信息");
         }
         user.setPassword("");
-        return MsgBuilder.buildReturnMessage(user);
+        List<Dept> deptList=deptService.findbytype(type);
+        Map map=MsgBuilder.buildReturnMessage(user);
+        map.put("deptList",deptList);
+        return map;
     }
 
     /**
@@ -79,12 +88,15 @@ public class DoctorController {
      * @return
      */
     @RequestMapping(value = "/addDoctor")
-    public Map addDoctor(String phone,String name){
+    public Map addDoctor(String phone,String name, String classify){
         if (StringUtils.isBlank(phone)) {
             return MsgBuilder.buildReturnErrorMessage("请输入手机号");
         }
         if (StringUtils.isBlank(name)) {
             return MsgBuilder.buildReturnErrorMessage("请输入姓名");
+        }
+        if (StringUtils.isBlank(classify)) {
+            return MsgBuilder.buildReturnErrorMessage("请选择");
         }
         //查看手机号是否存在
         User user=new User();
@@ -100,6 +112,7 @@ public class DoctorController {
         user.setCreation_time(new Date());
         String password = Md5.MD5(phone);
         user.setPassword(password);
+        user.setClassify(Integer.parseInt(classify));
         int i=userService.addDoctor(user);
         if(i>0){
             return MsgBuilder.buildReturnMessage("添加成功");
@@ -115,7 +128,7 @@ public class DoctorController {
      * @return
      */
     @RequestMapping(value = "/updateDoctor")
-    public Map updateDoctor(String name,String phone,String id){
+    public Map updateDoctor(String name,String phone,String id, String classify){
         if (StringUtils.isBlank(phone)) {
             return MsgBuilder.buildReturnErrorMessage("请输入手机号");
         }
@@ -124,6 +137,9 @@ public class DoctorController {
         }
         if (StringUtils.isBlank(id)) {
             return MsgBuilder.buildReturnErrorMessage("选择有误");
+        }
+        if (StringUtils.isBlank(classify)) {
+            return MsgBuilder.buildReturnErrorMessage("请选择选择");
         }
         User user=new User();
         user.setType(Constant.TYPE_DOCTOR);
@@ -141,6 +157,7 @@ public class DoctorController {
         }
         //手机号不存在  修改用户
         user.setName(name);
+        user.setClassify(Integer.parseInt(classify));
         int i=userService.updateDoctor(user);
         if(i>0){
             return MsgBuilder.buildReturnMessage("修改成功");
