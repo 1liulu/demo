@@ -2,6 +2,7 @@ package com.example.demo1.util;
 
 import com.alibaba.fastjson.JSON;
 import com.example.demo1.bean.Account;
+import com.example.demo1.bean.User;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,10 +15,12 @@ import java.util.logging.Logger;
 
 public class UserInterceptor implements HandlerInterceptor {
     final Logger logger = Logger.getLogger("org.jediael.crawl.MyCrawler");
-    private static final String urlMatcher = "\\S*(login)S*$";
+    private static final String urlMatcher = "\\S*(login|wx/wechatlogin|wx/phone|wx/code|wx/cardnum)S*$";
+    private static final String urlMatcher1 = "\\S*(wx/user|wxindex/user|Patient/list)S*$";
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-   //     logger.info("Begin Crawling, Good Luck!");
+        //     logger.info("Begin Crawling, Good Luck!");
 //        System.out.println(httpServletRequest.getRequestURL());
 //        System.out.println(httpServletRequest.getQueryString());
         //跨域访问设置
@@ -28,7 +31,7 @@ public class UserInterceptor implements HandlerInterceptor {
         String requestUrl = httpServletRequest.getServletPath();
         if (requestUrl.matches(urlMatcher) || requestUrl.indexOf("swagger") != -1 || requestUrl.contains("v2")) {
             return true;
-        }else{
+        } else {
             httpServletResponse.setContentType("application/json; charset=utf8");
             String token = httpServletRequest.getParameter("token");
             if (StringUtils.isBlank(token)) {
@@ -37,7 +40,7 @@ public class UserInterceptor implements HandlerInterceptor {
                 writer.write(JSON.toJSONString(resultMap));
                 writer.flush();
                 writer.close();
-            }else {
+            } else {
                 String tokenCheckResult = Token.verifyToken(token);
                 if (Constant.GENERATE_TOKEN_ERROR.equals(tokenCheckResult)) {
                     Map resultMap = MsgBuilder.buildReturnErrorMessage("token信息有误，请重试！");
@@ -45,7 +48,11 @@ public class UserInterceptor implements HandlerInterceptor {
                     writer.write(JSON.toJSONString(resultMap));
                     writer.flush();
                     writer.close();
-                } else {
+                }else if(requestUrl.matches(urlMatcher1)){
+                    User user=Token.getDataByTokenSubject1(tokenCheckResult);
+                    httpServletRequest.setAttribute("user", user);
+                    return true;
+                }else {
                     Account account = Token.getDataByTokenSubject(tokenCheckResult);
                     httpServletRequest.setAttribute("account", account);
                     return true;

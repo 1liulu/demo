@@ -3,6 +3,7 @@ package com.example.demo1.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo1.mapper.TokenMapper;
+import com.example.demo1.util.WechatConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class TokenService {
         JSONObject jsonParam = new JSONObject();
         jsonParam.put("id", "1401_1406");
         jsonParam.put("device_size", "480x720");
-        String url="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxdec7d4d8955730fc&secret=03ee494d14fbc60d734124b1d22aa4f3";
+        String url="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+WechatConfig.AppId +"&secret="+WechatConfig.secret;
         String data=getJsonData(jsonParam,url);
         Map map=(Map) JSON.parse(data);
         String token=(String) map.get("access_token");

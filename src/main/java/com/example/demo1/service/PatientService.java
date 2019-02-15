@@ -2,6 +2,7 @@ package com.example.demo1.service;
 
 
 import com.example.demo1.bean.Patient;
+import com.example.demo1.bean.User;
 import com.example.demo1.bean.Userimage;
 import com.example.demo1.mapper.PatientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,8 @@ public class PatientService {
     }
     public List<Userimage> findall(Patient patient){
         return patientMapper.findall(patient);
+    }
+    public List<Patient> findinuid(List<User> list){
+        return patientMapper.findinuid(list);
     }
 }

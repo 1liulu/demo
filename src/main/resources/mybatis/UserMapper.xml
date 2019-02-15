@@ -39,6 +39,10 @@
         INSERT INTO  y_user(phone,status,type,password,creation_time,name,classify)
 		VALUE(#{phone},#{status},#{type},#{password},#{creation_time},#{name},#{classify})
     </insert>
+    <insert id="addUser" parameterType="com.example.demo1.bean.User" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO  y_user(status,type,creation_time,openid,pid)
+		VALUE(#{status},#{type},#{creation_time},#{openid},#{pid})
+    </insert>
     <update id="updateDoctor" parameterType="com.example.demo1.bean.User">
         update  y_user SET name=#{name},phone=#{phone},classify=#{classify}
         WHERE id=#{id}
@@ -50,4 +54,20 @@
     <update id="deleteDoctor" parameterType="int">
         update  y_user SET `status`=0 WHERE id=#{0}
     </update>
+    <select id="findbyopenid"  parameterType="com.example.demo1.bean.User" resultType="com.example.demo1.bean.User">
+        SELECT * FROM y_user
+        where openid=#{openid} and type=#{type} and status=1 and pid=0
+    </select>
+    <select id="findbyuid" parameterType="java.lang.String" resultType="com.example.demo1.bean.User">
+        SELECT * FROM y_user
+        where cardnum=#{0} and type=1 and status=1
+    </select>
+    <update id="updateuser" parameterType="com.example.demo1.bean.User">
+        update  y_user SET dept='机构1',phone=#{phone},cardnum=#{cardnum}
+        WHERE id=#{id}
+    </update>
+    <select id="findbypid" parameterType="int" resultType="com.example.demo1.bean.User">
+        SELECT * FROM y_user
+        where type=1 and status=1 and pid=#{0}
+    </select>
 </mapper>

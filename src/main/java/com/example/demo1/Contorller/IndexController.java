@@ -13,9 +13,14 @@ import com.example.demo1.util.Constant;
 import com.example.demo1.util.MsgBuilder;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +33,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/index")
+@Api(tags = "首页")
 public class IndexController {
     @Autowired
     ReportService reportService;
@@ -45,7 +51,14 @@ public class IndexController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/show")
+    @RequestMapping(value = "/show", method = {RequestMethod.POST, RequestMethod.GET})
+    @ApiOperation(value = "查看检查报告列表", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "当前页数", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "size", value = "每页显示数据", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "name", value = "姓名", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "type", value = "类型", required = true, dataType = "String", paramType = "query")
+    })
     public Map show(String page, String size, String name, HttpServletRequest request, String type) {
         Integer pageNum = 1;
         Integer pageSize = 1;
@@ -70,7 +83,25 @@ public class IndexController {
         PageInfo<Report> pageInfo = new PageInfo<>(reportList);
         return MsgBuilder.buildReturnMessage(pageInfo);
     }
-    @RequestMapping(value = "/userimage")
+
+    /**
+     * 按病人分类查看检查报告列表
+     * @param phone
+     * @param name
+     * @param uid
+     * @param page
+     * @param size
+     * @return
+     */
+    @RequestMapping(value = "/userimage", method = {RequestMethod.POST, RequestMethod.GET})
+    @ApiOperation(value = "按病人分类查看检查报告列表", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phonr", value = "手机号", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "name", value = "姓名", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "uid", value = "uid", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "page", value = "当前页数", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "size", value = "每页显示数据", required = true, dataType = "String", paramType = "query")
+    })
     public Map userimage(String phone,String name,String uid,String page, String size){
         Integer pageNum = 1;
         Integer pageSize = 10;
@@ -120,7 +151,11 @@ public class IndexController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/image")
+    @ApiOperation(value = "查看病例图片", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true, dataType = "String", paramType = "query")
+    })
+    @RequestMapping(value = "/image", method = {RequestMethod.POST, RequestMethod.GET})
     public Map image(int id) {
         String map = "{\n" +
                 "  \"status\": 200,\n" +
@@ -206,7 +241,8 @@ public class IndexController {
      * 首页统计1
      * @return
      */
-    @RequestMapping(value = "/inspection1")
+    @ApiOperation(value = "首页统计1", notes = "返回提示")
+    @RequestMapping(value = "/inspection1", method = {RequestMethod.POST, RequestMethod.GET})
     public Map inspection1() {
         Map<String, Object> map = new HashMap<>();
         //计算当天检查人数
@@ -223,7 +259,8 @@ public class IndexController {
      * 首页统计2
      * @return
      */
-    @RequestMapping(value = "/inspection2")
+    @ApiOperation(value = "首页统计2", notes = "返回提示")
+    @RequestMapping(value = "/inspection2", method = {RequestMethod.POST, RequestMethod.GET})
     public Map inspection2() {
         Map<String, Object> map = new HashMap<>();
         //今天男的检查人数
@@ -251,7 +288,8 @@ public class IndexController {
      * 首页统计3
      * @return
      */
-    @RequestMapping(value = "/inspection3")
+    @ApiOperation(value = "首页统计3", notes = "返回提示")
+    @RequestMapping(value = "/inspection3", method = {RequestMethod.POST, RequestMethod.GET})
     public Map inspection3() {
         List<Report> reportList = reportService.findalls();
         int dx[] = new int[12];
@@ -458,7 +496,8 @@ public class IndexController {
      * 首页统计4
      * @return
      */
-    @RequestMapping(value = "/inspection4")
+    @ApiOperation(value = "首页统计4", notes = "返回提示")
+    @RequestMapping(value = "/inspection4", method = {RequestMethod.POST, RequestMethod.GET})
     public Map inspection4() {
         List<Report> reportList = reportService.findalls();
         List<Report> reportList1 = new ArrayList<Report>();

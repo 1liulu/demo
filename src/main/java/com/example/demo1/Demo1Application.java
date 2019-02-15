@@ -51,7 +51,7 @@ public class Demo1Application {
 		properties.setProperty("params", "count=countSql");
 		pageHelper.setProperties(properties);
 
-		return pageHelper;
+		return pageHelper; 	
 	}
 	@Bean
 	public PlatformTransactionManager transactionManager() {
@@ -60,6 +60,6 @@ public class Demo1Application {
 	//配置mybatis的分页插件pageHelper
 
 	public static void main(String[] args) {
-		SpringApplication.run(Demo1Application.class, args);
+ 		SpringApplication.run(Demo1Application.class, args);
 	}
 }

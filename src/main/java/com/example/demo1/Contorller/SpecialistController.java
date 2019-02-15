@@ -9,9 +9,14 @@ import com.example.demo1.util.Md5;
 import com.example.demo1.util.MsgBuilder;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -21,6 +26,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/specialist")
+@Api(tags = "专家管理")
 public class SpecialistController {
     @Autowired
     UserService userService;
@@ -34,7 +40,13 @@ public class SpecialistController {
      * @param name
      * @return
      */
-    @RequestMapping(value = "/specialistfinall")
+    @ApiOperation(value = "查询所有专家账号", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "当前页数", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "size", value = "每页显示数据", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "name", value = "姓名", required = true, dataType = "String", paramType = "query")
+    })
+    @RequestMapping(value = "/specialistfinall", method = {RequestMethod.POST, RequestMethod.GET})
     public Map specialistfinall(String page, String size, String name) {
         Integer pageNum = 1;
         Integer pageSize = 1;
@@ -61,7 +73,12 @@ public class SpecialistController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/specialistParticulars")
+    @ApiOperation(value = "查询专家账户详情", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "type", value = "类型", required = true, dataType = "String", paramType = "query")
+    })
+    @RequestMapping(value = "/specialistParticulars", method = {RequestMethod.POST, RequestMethod.GET})
     public Map specialistParticulars(String id,String type) {
         if (StringUtils.isBlank(id)) {
             return MsgBuilder.buildReturnErrorMessage("访问受限制");
@@ -90,7 +107,13 @@ public class SpecialistController {
      * @param name
      * @return
      */
-    @RequestMapping(value = "/addSpecialist")
+    @ApiOperation(value = "添加专家账户", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", value = "手机号", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "name", value = "姓名", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "classify", value = "类型", required = true, dataType = "String", paramType = "query")
+    })
+    @RequestMapping(value = "/addSpecialist", method = {RequestMethod.POST, RequestMethod.GET})
     public Map addSpecialist(String phone, String name, String classify) {
         if (StringUtils.isBlank(phone)) {
             return MsgBuilder.buildReturnErrorMessage("请输入手机号");
@@ -131,7 +154,14 @@ public class SpecialistController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/updateSpecialist")
+    @ApiOperation(value = "修改专家账户信息", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "姓名", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "phone", value = "手机号", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "id", value = "id", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "classify", value = "类型", required = true, dataType = "String", paramType = "query")
+    })
+    @RequestMapping(value = "/updateSpecialist", method = {RequestMethod.POST, RequestMethod.GET})
     public Map updateSpecialist(String name, String phone, String id, String classify) {
         if (StringUtils.isBlank(phone)) {
             return MsgBuilder.buildReturnErrorMessage("请输入手机号");
@@ -175,7 +205,11 @@ public class SpecialistController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/deleteSpecialist")
+    @ApiOperation(value = "删除专家账户", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true, dataType = "String", paramType = "query")
+    })
+    @RequestMapping(value = "/deleteSpecialist", method = {RequestMethod.POST, RequestMethod.GET})
     public Map deleteSpecialist(String id) {
         if (StringUtils.isBlank(id)) {
             return MsgBuilder.buildReturnErrorMessage("选择账号有误");

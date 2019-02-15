@@ -9,9 +9,14 @@ import com.example.demo1.util.Md5;
 import com.example.demo1.util.MsgBuilder;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -21,6 +26,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/doctor")
+@Api(tags = "医生管理")
 public class DoctorController {
     @Autowired
     UserService userService;
@@ -33,7 +39,13 @@ public class DoctorController {
      * @param name
      * @return
      */
-    @RequestMapping(value = "/doctorfinall")
+    @ApiOperation(value = "查询所有医生账号", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "当前页数", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "size", value = "每页显示数据", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "name", value = "医生姓名", required = true, dataType = "String", paramType = "query")
+    })
+    @RequestMapping(value = "/doctorfinall", method = {RequestMethod.POST, RequestMethod.GET})
     public Map doctorfinall(String page, String size,String name){
         Integer pageNum = 1;
         Integer pageSize = 1;
@@ -59,7 +71,12 @@ public class DoctorController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/doctorParticulars")
+    @ApiOperation(value = "查询医生账户详情", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "医生ID", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "type", value = "类型", required = true, dataType = "String", paramType = "query")
+    })
+    @RequestMapping(value = "/doctorParticulars", method = {RequestMethod.POST, RequestMethod.GET})
     public Map doctorParticulars(String id,String type){
         if (StringUtils.isBlank(id)) {
             return MsgBuilder.buildReturnErrorMessage("访问受限制");
@@ -87,7 +104,13 @@ public class DoctorController {
      * @param name
      * @return
      */
-    @RequestMapping(value = "/addDoctor")
+    @ApiOperation(value = "添加医生账户", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", value = "手机号", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "name", value = "姓名", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "classify", value = "类型", required = true, dataType = "String", paramType = "query")
+    })
+    @RequestMapping(value = "/addDoctor", method = {RequestMethod.POST, RequestMethod.GET})
     public Map addDoctor(String phone,String name, String classify){
         if (StringUtils.isBlank(phone)) {
             return MsgBuilder.buildReturnErrorMessage("请输入手机号");
@@ -127,7 +150,14 @@ public class DoctorController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/updateDoctor")
+    @ApiOperation(value = "修改医生账户信息", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "姓名", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "phone", value = "手机号", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "id", value = "医生ID", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "classify", value = "类型", required = true, dataType = "String", paramType = "query")
+    })
+    @RequestMapping(value = "/updateDoctor", method = {RequestMethod.POST, RequestMethod.GET})
     public Map updateDoctor(String name,String phone,String id, String classify){
         if (StringUtils.isBlank(phone)) {
             return MsgBuilder.buildReturnErrorMessage("请输入手机号");
@@ -170,7 +200,11 @@ public class DoctorController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/deleteDactor")
+    @ApiOperation(value = "删除医生账户", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "医生ID", required = true, dataType = "String", paramType = "query"),
+            })
+    @RequestMapping(value = "/deleteDactor", method = {RequestMethod.POST, RequestMethod.GET})
     public Map deleteDactor(String id){
         if (StringUtils.isBlank(id)) {
             return MsgBuilder.buildReturnErrorMessage("选择账号有误");

@@ -5,9 +5,14 @@ import com.alibaba.fastjson.JSON;
 import com.example.demo1.bean.Account;
 import com.example.demo1.service.AccountService;
 import com.example.demo1.util.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -18,6 +23,7 @@ import java.util.Map;
  * 用户登录
  */
 @RestController
+@Api(tags = "用户登录")
 public class LoginController {
     @Autowired
     private AccountService accountService;
@@ -29,7 +35,13 @@ public class LoginController {
      * @param pass
      * @return
      */
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/login", method = {RequestMethod.POST, RequestMethod.GET})
+    @ApiOperation(value = "登录", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name", value = "用户名", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "pass", value = "密码", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "type", value = "类型", required = true, dataType = "String", paramType = "query")
+    })
     public Map login(String name, String pass,String type) {
         if (StringUtils.isBlank(name) || StringUtils.isBlank(pass)||StringUtils.isBlank(type)) {
             return MsgBuilder.buildReturnErrorMessage("用户名或密码不能为空");

@@ -53,6 +53,13 @@ public interface UserMapper {
     public int addSpecia(User user);
 
     /**
+     * 添加用户账号
+     * @param user
+     * @return
+     */
+    public int addUser(User user);
+
+    /**
      * 修改医生账户
      * @param user
      * @return
@@ -72,4 +79,32 @@ public interface UserMapper {
      * @return
      */
     public int deleteDoctor(int id);
+
+    /**
+     * 根据openid查找用户
+     * @param user
+     * @return
+     */
+    public User findbyopenid(User user);
+
+    /**
+     * 根据uid查找用户
+     * @param uid
+     * @return
+     */
+    public List<User> findbyuid(String uid);
+
+    /**
+     * 修改
+     * @param user
+     * @return
+     */
+    public int updateuser(User user);
+
+    /**
+     * 根据pid查询
+     * @param pid
+     * @return
+     */
+    public List<User> findbypid(int pid);
 }

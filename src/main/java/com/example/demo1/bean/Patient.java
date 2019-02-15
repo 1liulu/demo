@@ -23,6 +23,17 @@ public class Patient {
     //创建时间
     private Date creation_time;
 
+
+    private int number;
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
     public int getId() {
         return id;
     }

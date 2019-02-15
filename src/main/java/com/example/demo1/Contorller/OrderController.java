@@ -5,9 +5,14 @@ import com.example.demo1.service.OrderService;
 import com.example.demo1.util.MsgBuilder;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -17,6 +22,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/order")
+@Api(tags = "订单")
 public class OrderController {
     @Autowired
     OrderService orderService;
@@ -25,7 +31,8 @@ public class OrderController {
      * 统计缴费金额
      * @return
      */
-    @RequestMapping(value = "/countorder")
+    @ApiOperation(value = "统计缴费金额", notes = "返回提示")
+    @RequestMapping(value = "/countorder", method = {RequestMethod.POST, RequestMethod.GET})
     public Map countorder(){
         Map<String, Object> map = new HashMap<>();
         map.put("todayprice",orderService.todayprice());
@@ -40,7 +47,12 @@ public class OrderController {
      * @param size
      * @return
      */
-    @RequestMapping(value = "/page")
+    @ApiOperation(value = "查询全部订单", notes = "返回提示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "当前页数", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "size", value = "每页显示数据", required = true, dataType = "String", paramType = "query")
+    })
+    @RequestMapping(value = "/page", method = {RequestMethod.POST, RequestMethod.GET})
     public Map page(String page, String size) {
         Integer pageNum = 1;
         Integer pageSize = 10;

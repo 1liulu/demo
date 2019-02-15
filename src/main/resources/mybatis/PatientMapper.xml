@@ -26,4 +26,16 @@
 		</if>
 		ORDER BY creation_time DESC
 	</select>
+	<select id="findinuid" parameterType="java.util.List" resultType="com.example.demo1.bean.Patient">
+		SELECT y_patient.* ,IF(ISNULL(y_report.id),0,COUNT(*)) as number
+		FROM  y_report
+		right   JOIN y_patient on (y_report.uid=y_patient.uid)
+		WHERE y_patient.uid IN
+		<foreach item="item" index="index" collection="list"
+				 open="(" separator="," close=")">
+			#{item.cardnum}
+		</foreach>
+		AND y_patient.`status`=1
+		GROUP BY y_report.uid
+	</select>
 </mapper>
