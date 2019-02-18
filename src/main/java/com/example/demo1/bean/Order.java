@@ -12,6 +12,33 @@ public class Order {
     private int status;
     private double price;
     private Date createtime;
+    private int film_num;
+    private Date pay_time;
+    private int is_handle;
+
+    public int getFilm_num() {
+        return film_num;
+    }
+
+    public void setFilm_num(int film_num) {
+        this.film_num = film_num;
+    }
+
+    public Date getPay_time() {
+        return pay_time;
+    }
+
+    public void setPay_time(Date pay_time) {
+        this.pay_time = pay_time;
+    }
+
+    public int getIs_handle() {
+        return is_handle;
+    }
+
+    public void setIs_handle(int is_handle) {
+        this.is_handle = is_handle;
+    }
 
     public int getId() {
         return id;

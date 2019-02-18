@@ -40,8 +40,22 @@
 		VALUE(#{phone},#{status},#{type},#{password},#{creation_time},#{name},#{classify})
     </insert>
     <insert id="addUser" parameterType="com.example.demo1.bean.User" useGeneratedKeys="true" keyProperty="id" >
-        INSERT INTO  y_user(status,type,creation_time,openid,pid)
-		VALUE(#{status},#{type},#{creation_time},#{openid},#{pid})
+        INSERT INTO  y_user(status,type,creation_time,openid,pid
+          <if test="cardnum != null">
+              ,cardnum
+          </if>
+          <if test="name != null">
+              ,name
+          </if>
+        )
+		VALUE(#{status},#{type},#{creation_time},#{openid},#{pid}
+            <if test="cardnum != null">
+                ,#{cardnum}
+            </if>
+            <if test="name != null">
+                ,#{name}
+            </if>
+        )
     </insert>
     <update id="updateDoctor" parameterType="com.example.demo1.bean.User">
         update  y_user SET name=#{name},phone=#{phone},classify=#{classify}

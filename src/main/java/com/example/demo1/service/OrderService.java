@@ -1,6 +1,7 @@
 package com.example.demo1.service;
 
 import com.example.demo1.bean.Order;
+import com.example.demo1.bean.OrderDetails;
 import com.example.demo1.mapper.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,14 @@ public class OrderService {
      */
     public List<Order> findall(){
         return orderMapper.findall();
+    }
+
+    /**
+     * 查找用户下订单信息
+     * @param id
+     * @return
+     */
+    public List<OrderDetails> findbyuid(int id){
+        return orderMapper.findbyuid(id);
     }
 }

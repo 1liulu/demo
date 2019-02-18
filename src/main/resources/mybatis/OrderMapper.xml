@@ -26,4 +26,79 @@
 			WHERE `status`=1 AND is_pay=1
 			ORDER BY createtime DESC
 	</select>
+    <select id="findbyuid" parameterType="int" resultType="com.example.demo1.bean.OrderDetails">
+			SELECT
+			<include refid="userColumns"/>
+			FROM y_order
+			INNER JOIN y_user ON(y_order.uid=y_user.id)
+			INNER JOIN y_user u1 ON(y_order.did=u1.id)
+			LEFT  JOIN y_report ON(y_report.id=y_order.film_num)
+			LEFT JOIN y_consultation_report ON(y_consultation_report.oid=y_order.id)
+			WHERE y_order.uid IN (SELECT id FROM y_user
+			WHERE id=#{0} OR pid=#{0})
+			AND  y_order.`status`=1
+			AND is_pay=1
+	</select>
+    <sql id="userColumns">
+			y_order.id AS "order.id",
+			y_order.uid AS "order.uid",
+			y_order.did AS "order.did",
+			y_order.order_num AS "order.order_num",
+			y_order.is_pay AS "order.is_pay",
+			y_order.status AS "order.status",
+			y_order.price AS "order.price",
+			y_order.createtime AS "order.createtime",
+			y_order.film_num AS "order.film_num",
+			y_order.pay_time AS "order.pay_time",
+			y_order.is_handle AS "order.is_handle",
+			y_user.id AS "u_user.id",
+			y_user.cardnum AS "u_user.cardnum",
+			y_user.phone AS "u_user.phone",
+			y_user.status AS "u_user.status",
+			y_user.dept AS "u_user.dept",
+			y_user.openid AS "u_user.openid",
+			y_user.type AS "u_user.type",
+			y_user.pid AS "u_user.pid",
+			y_user.creation_time AS "u_user.creation_time",
+			y_user.`name` AS "u_user.`name`",
+			y_user.classify AS "u_user.classify",
+			u1.id AS "d_user.id",
+			u1.cardnum AS "d_user.cardnum",
+			u1.phone AS "d_user.phone",
+			u1.status AS "d_user.status",
+			u1.dept AS "d_user.dept",
+			u1.openid AS "d_user.openid",
+			u1.type AS "d_user.type",
+			u1.pid AS "d_user.pid",
+			u1.creation_time AS "d_user.creation_time",
+			u1.`name` AS "d_user.`name`",
+			u1.classify AS "d_user.classify",
+			y_report.id AS "report.id",
+			y_report.items AS "report.items",
+			y_report.apply_departments AS "report.apply_departments",
+			y_report.apply_date AS "report.apply_date",
+			y_report.apply_doctor AS "report.apply_doctor",
+			y_report.examination_finding AS "report.examination_finding",
+			y_report.impression AS "report.impression",
+			y_report.inspection_time AS "report.inspection_time",
+			y_report.report_time AS "report.report_time",
+			y_report.report_docto AS "report.report_docto",
+			y_report.audit_docto AS "report.audit_docto",
+			y_report.type AS "report.type",
+			y_report.patient_id AS "report.patient_id",
+			y_report.check_no AS "report.check_no",
+			y_report.name AS "report.name",
+			y_report.status AS "report.status",
+			y_report.creation_time AS "report.creation_time",
+			y_report.dept AS "report.dept ",
+			y_report.uid AS "report.uid",
+			y_report.report_id AS "report.report_id",
+			y_report.departments AS "report.departments",
+			y_consultation_report.id AS "consultationReport.id",
+			y_consultation_report.oid AS "consultationReport.oid",
+			y_consultation_report.`status` AS "consultationReport.`status`",
+			y_consultation_report.createtime AS "consultationReport.createtime",
+			y_consultation_report.post_title AS "consultationReport.post_title",
+			y_consultation_report.post_content AS "consultationReport.post_content"
+	</sql>
 </mapper>

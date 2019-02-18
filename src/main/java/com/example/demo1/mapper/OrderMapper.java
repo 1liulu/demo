@@ -2,6 +2,7 @@ package com.example.demo1.mapper;
 
 
 import com.example.demo1.bean.Order;
+import com.example.demo1.bean.OrderDetails;
 
 import java.util.List;
 
@@ -30,4 +31,10 @@ public interface OrderMapper {
      */
     public List<Order> findall();
 
+    /**
+     * 查找用户下订单信息
+     * @param id
+     * @return
+     */
+    public List<OrderDetails> findbyuid(int id);
 }
