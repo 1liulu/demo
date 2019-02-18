@@ -159,4 +159,13 @@ public class UserService {
     public List<User> findbypid(int pid){
         return userMapper.findbypid(pid);
     }
+    /**
+     * 根据姓名手机号查询医生
+     * @param name
+     * @param phone
+     * @return
+     */
+    public List<User> findbynameandphone(String name,String phone){
+        return userMapper.findbynameandphone(name,phone);
+    }
 }

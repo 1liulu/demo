@@ -84,4 +84,10 @@
         SELECT * FROM y_user
         where type=1 and status=1 and pid=#{0}
     </select>
+    <select id="findbynameandphone" parameterType="java.lang.String" resultType="com.example.demo1.bean.User">
+        SELECT * FROM y_user
+        WHERE `status`=1 AND type=2
+        AND `name`=#{0}
+        AND phone=#{1}
+    </select>
 </mapper>
