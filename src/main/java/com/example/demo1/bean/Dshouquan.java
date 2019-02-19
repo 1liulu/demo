@@ -16,6 +16,34 @@ public class Dshouquan {
     //结束日期
     private Date endtime;
 
+    private String username;
+    private String doctorname;
+    private String report_id;
+
+    public String getReport_id() {
+        return report_id;
+    }
+
+    public void setReport_id(String report_id) {
+        this.report_id = report_id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getDoctorname() {
+        return doctorname;
+    }
+
+    public void setDoctorname(String doctorname) {
+        this.doctorname = doctorname;
+    }
+
     public int getId() {
         return id;
     }

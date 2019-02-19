@@ -9,5 +9,22 @@
             INSERT INTO y_dshouquan(rid,to_who,uid,starttime,endtime,status)
             VALUES(#{rid},#{to_who},#{uid},#{starttime},#{endtime},#{status})
         </insert>
+        <select id="findbyuid" resultType="com.example.demo1.bean.Dshouquan" parameterType="com.example.demo1.bean.User">
+            SELECT y_dshouquan.*,y_user.`name` AS username,y_patient.`name` AS doctorname,y_report.report_id as report_id
+            FROM y_dshouquan
+            INNER JOIN y_report ON(y_report.id=y_dshouquan.rid)
+            INNER JOIN y_patient ON(y_report.uid=y_patient.uid)
+            INNER JOIN y_user ON(y_user.id=y_dshouquan.to_who)
+            WHERE y_dshouquan.`status`=1
+            AND y_dshouquan.uid IN(
+            SELECT id FROM y_user
+            WHERE id=#{id} OR pid=#{id})
+            <if test="type==1">
+                AND y_dshouquan.endtime>NOW()
+            </if>
+            <if test="type==0">
+                AND NOW()>y_dshouquan.endtime
+            </if>
 
+        </select>
    </mapper>

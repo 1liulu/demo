@@ -7,7 +7,8 @@ import java.util.function.Predicate;
 
 public class Constant {
 
-
+    public static final int type_overdue = 0;//过期
+    public static final int type_notoverdue = 1;//未过期
 
     //token生成异常
     public final static String GENERATE_TOKEN_ERROR = "-1";

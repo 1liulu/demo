@@ -82,6 +82,13 @@ public class PatientController {
      */
     @RequestMapping("/reportDetails")
     public Map reportDetails(String id) {
+        if (StringUtils.isBlank(id)) {
+            return MsgBuilder.buildReturnErrorMessage("请选择检查报告");
+        }
+        Report report=new Report();
+
+        report.setReport_id(id);
+        reportService.findall(report);
         String map = "{\n" +
                 "  \"status\": 200,\n" +
                 "  \"message\": \"\",\n" +

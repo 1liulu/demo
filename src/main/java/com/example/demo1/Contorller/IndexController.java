@@ -76,8 +76,6 @@ public class IndexController {
         if (StringUtils.isBlank(type)) {
             Account account = (Account) request.getAttribute("account");
             report.setType(account.getType());
-        } else {
-            report.setType("5");
         }
         List<Report> reportList = reportService.findall(report);
         PageInfo<Report> pageInfo = new PageInfo<>(reportList);
