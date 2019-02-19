@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper  
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+          
+   <mapper namespace="com.example.demo1.mapper.DshouquanMapper">
+   
+        <insert id="addshouquan" parameterType="com.example.demo1.bean.Dshouquan">
+            INSERT INTO y_dshouquan(rid,to_who,uid,starttime,endtime,status)
+            VALUES(#{rid},#{to_who},#{uid},#{starttime},#{endtime},#{status})
+        </insert>
+
+   </mapper>

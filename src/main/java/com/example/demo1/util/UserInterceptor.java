@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class UserInterceptor implements HandlerInterceptor {
     final Logger logger = Logger.getLogger("org.jediael.crawl.MyCrawler");
     private static final String urlMatcher = "\\S*(login|wx/wechatlogin|wx/phone|wx/code|wx/cardnum)S*$";
-    private static final String urlMatcher1 = "\\S*(wx/user|wxindex/user|Patient/list|Patient/addPatient|Patient/particulars|Patient/specialistfinall|Consultation/list)S*$";
+    private static final String urlMatcher1 = "\\S*(wx/user|wxindex/user|Patient/list|Patient/addPatient|Patient/particulars|Patient/reportDetails|Patient/specialistfinall|Consultation/list|authorization/addAuthorization)S*$";
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {

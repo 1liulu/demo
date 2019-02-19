@@ -110,9 +110,8 @@ public interface UserMapper {
 
     /**
      * 根据姓名手机号查询医生
-     * @param name
-     * @param phone
+
      * @return
      */
-    public List<User> findbynameandphone(String name,String phone);
+    public List<User> findbynameandphone(User user);
 }

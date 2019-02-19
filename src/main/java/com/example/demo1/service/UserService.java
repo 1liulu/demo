@@ -166,6 +166,9 @@ public class UserService {
      * @return
      */
     public List<User> findbynameandphone(String name,String phone){
-        return userMapper.findbynameandphone(name,phone);
+        User user=new User();
+        user.setName(name);
+        user.setPhone(phone);
+        return userMapper.findbynameandphone(user);
     }
 }
