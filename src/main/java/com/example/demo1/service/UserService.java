@@ -171,4 +171,17 @@ public class UserService {
         user.setPhone(phone);
         return userMapper.findbynameandphone(user);
     }
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    public int deluser(String id){
+        List<User> userList=userMapper.findbycardnum(id);
+        if ( userList.size()==0){
+            return 0;
+        }
+        return userMapper.deluser(userList.get(0).getId());
+    }
 }

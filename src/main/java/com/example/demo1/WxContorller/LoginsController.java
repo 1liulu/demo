@@ -38,7 +38,7 @@ public class LoginsController {
     @RequestMapping("/wechatlogin")
     public void wechatlogin(HttpServletRequest request, HttpServletResponse response) {
         StringBuffer  ctxPath =new StringBuffer(request.getScheme() + "://" + request.getServerName() + request.getContextPath());
-        ctxPath.append("/code");
+        ctxPath.append("/hospital/wx/code");
         String url =Wechat2.getAuthorityUrl(ctxPath.toString(), "STATE", "snsapi_base");
         try {
             response.sendRedirect(url);
@@ -52,14 +52,14 @@ public class LoginsController {
     public Map code(String code){
         Map<String, Object> result = new HashMap<>();
         int type;
-//        JSONObject json =Wechat2.getReturmParam(Wechat2.getTokenAndOpenidUrl(code));
-//        String openid="";
-//        try{
-//            openid = json.getString("openid");
-//        }catch(Exception e){
-//            //失败
-//            return MsgBuilder.buildReturnErrorMessage("解析异常");
-//        }
+        /*JSONObject json =Wechat2.getReturmParam(Wechat2.getTokenAndOpenidUrl(code));
+        String openid="";
+        try{
+            openid = json.getString("openid");
+        }catch(Exception e){
+            //失败
+            return MsgBuilder.buildReturnErrorMessage("解析异常");
+        }*/
         String openid=code;
         User user=userService.findbyopenid(openid);
         Map tokenMap = new HashMap(1);
@@ -93,6 +93,8 @@ public class LoginsController {
         if (Constant.GENERATE_TOKEN_ERROR.equals(tokenStr)) {
             return MsgBuilder.buildReturnErrorMessage("token生成异常，请稍候重试！");
         }
+//        response.sendRedirect("http://jp.starint.cn/#/binding?token="+tokenStr+"&type="+type);
+
         result.put("token", tokenStr);
         result.put("type",type);
         return MsgBuilder.buildReturnMessage(result);
@@ -103,11 +105,8 @@ public class LoginsController {
      * @param phone
      * @return
      */
-    @RequestMapping("/phone")
     public Map phone(String phone){
-        if (StringUtils.isBlank(phone)) {
-            return MsgBuilder.buildReturnErrorMessage("请输入手机号");
-        }
+
         int type;
         Map<String, Object> result = new HashMap<>();
         User user=new User();
@@ -121,9 +120,10 @@ public class LoginsController {
         }else{
             //有用户绑定手机号
             type=0;
+            result.put("message","手机号已被绑定");
         }
         result.put("type",type);
-        return MsgBuilder.buildReturnMessage(result);
+        return result;
     }
 
     /**
@@ -131,11 +131,9 @@ public class LoginsController {
      * @param cardnum
      * @return
      */
-    @RequestMapping("/cardnum")
     public Map cardnum(String cardnum){
-        if (StringUtils.isBlank(cardnum)) {
-            return MsgBuilder.buildReturnErrorMessage("请输入卡号");
-        }
+        int type=1;
+        Map<String, Object> result = new HashMap<>();
         //判断卡号是否存在系统中
         Patient patient = new Patient();
         patient.setUid(cardnum);
@@ -143,14 +141,21 @@ public class LoginsController {
         List<Patient> patientList = patientService.findbyuid(patient);
         if(patientList.size()==0){
             //不在系统中
-            return MsgBuilder.buildReturnErrorMessage("输入的卡号不存在");
+            type=0;
+            result.put("type",type);
+            result.put("message","输入的卡号不存在");
+            return result;
         }
         //判断是否有用户已绑定卡号
         List<User> userList=userService.findbyuid(cardnum);
         if (userList.size()!=0){
-            return MsgBuilder.buildReturnErrorMessage("该卡号已被绑定请解除后绑定");
+            type=0;
+            result.put("type",type);
+            result.put("message","该卡号已被绑定请解除后绑定");
+            return result;
         }
-        return MsgBuilder.buildReturnMessage("卡号验证通过");
+        result.put("type",type);
+        return result;
     }
 
     /**
@@ -168,6 +173,15 @@ public class LoginsController {
         if (StringUtils.isBlank(cardnum)) {
             return MsgBuilder.buildReturnErrorMessage("请输入卡号");
         }
+        Map mapphone=phone(phone);
+        if((int)mapphone.get("type")==0){
+            return MsgBuilder.buildReturnErrorMessage((String) mapphone.get("message"));
+        }
+        Map mapcardnum=cardnum(cardnum);
+        if((int)mapcardnum.get("type")==0){
+            return MsgBuilder.buildReturnErrorMessage((String) mapcardnum.get("message"));
+        }
+
         User user =  (User) httpServletRequest.getAttribute("user");
         user.setPhone(phone);
         user.setCardnum(cardnum);

@@ -90,4 +90,11 @@
         AND type=2
         AND name=#{name} and phone=#{phone}
     </select>
+    <update id="deluser" parameterType="int" >
+        update  y_user SET status=0
+        WHERE id=#{0}
+    </update>
+    <select id="findbycardnum" parameterType="java.lang.String" resultType="com.example.demo1.bean.User">
+        select * from y_user where cardnum=#{0} and status=1
+    </select>
 </mapper>

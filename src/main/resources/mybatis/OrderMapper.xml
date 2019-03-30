@@ -35,7 +35,7 @@
 			LEFT  JOIN y_report ON(y_report.id=y_order.film_num)
 			LEFT JOIN y_consultation_report ON(y_consultation_report.oid=y_order.id)
 			WHERE y_order.uid IN (SELECT id FROM y_user
-			WHERE id=#{0} OR pid=#{0})
+			WHERE (id=#{0} OR pid=#{0}) and status=1)
 			AND  y_order.`status`=1
 			AND is_pay=1
 	</select>

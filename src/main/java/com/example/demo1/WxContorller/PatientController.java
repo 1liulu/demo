@@ -1,6 +1,5 @@
 package com.example.demo1.WxContorller;
 
-import com.alibaba.fastjson.JSON;
 import com.example.demo1.bean.Patient;
 import com.example.demo1.bean.Report;
 import com.example.demo1.bean.User;
@@ -42,8 +41,6 @@ public class PatientController {
         List<Patient> patientList=patientService.findinuid(userLists);
         result.put("patient",patientList.get(0));
         List<User> userList=userService.findbypid(user.getId());
-        String[] a=new String[1];
-        a[0]="";
         if (userList.size()==0){
             result.put("list",null);
         }else {
@@ -88,7 +85,7 @@ public class PatientController {
         Report report=new Report();
 
         report.setReport_id(id);
-        reportService.findall(report);
+        List<Report> reportList=reportService.findall(report);
         String map = "{\n" +
                 "  \"status\": 200,\n" +
                 "  \"message\": \"\",\n" +
@@ -165,7 +162,8 @@ public class PatientController {
                 "    \"task_id\": \"\"\n" +
                 "  }\n" +
                 "}";
-        return MsgBuilder.buildReturnMessage((Map) JSON.parse(map));
+        //return MsgBuilder.buildReturnMessage((Map) JSON.parse(map));
+        return MsgBuilder.buildReturnMessage(reportList.get(0));
 
     }
 
@@ -182,7 +180,7 @@ public class PatientController {
     }
 
     /**
-     *
+     *添加家庭组
      * @param name
      * @param cardnum
      * @return
@@ -219,5 +217,23 @@ public class PatientController {
         user.setName(name);
         userService.addUser(user);
         return MsgBuilder.buildReturnMessage("添加成功");
+    }
+
+    /**
+     * 删除家庭组成员
+     * @param uid
+     * @return
+     */
+    @RequestMapping("/deluser")
+    public Map deluser(String uid){
+        if (StringUtils.isBlank(uid)) {
+            return MsgBuilder.buildReturnErrorMessage("请选择家庭组成员");
+        }
+
+        int i=userService.deluser(uid);
+        if (i==0){
+            return MsgBuilder.buildReturnErrorMessage("删除失败");
+        }
+        return MsgBuilder.buildReturnMessage("删除成功");
     }
 }

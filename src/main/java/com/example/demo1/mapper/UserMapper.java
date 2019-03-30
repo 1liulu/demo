@@ -114,4 +114,12 @@ public interface UserMapper {
      * @return
      */
     public List<User> findbynameandphone(User user);
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    public int deluser(int id);
+    public List<User> findbycardnum(String id);
 }

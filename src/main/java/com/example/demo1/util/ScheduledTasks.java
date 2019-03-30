@@ -18,7 +18,7 @@ public class ScheduledTasks {
     /**
      * 每小时更新一次
      */
-    @Scheduled(cron = "0 0 * * * ?")
+   /* @Scheduled(cron = "0 0 * * * ?")*/
     public void reportCurrentTime() {
         //tokenService.update();
         System.out.println("刷新token：" + dateFormat.format(new Date()));

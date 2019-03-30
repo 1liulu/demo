@@ -18,7 +18,7 @@
             WHERE y_dshouquan.`status`=1
             AND y_dshouquan.uid IN(
             SELECT id FROM y_user
-            WHERE id=#{id} OR pid=#{id})
+            WHERE (id=#{id} OR pid=#{id}) and status=1)
             <if test="type==1">
                 AND y_dshouquan.endtime>NOW()
             </if>
