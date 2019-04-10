@@ -121,5 +121,11 @@ public interface UserMapper {
      * @return
      */
     public int deluser(int id);
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     public List<User> findbycardnum(String id);
 }

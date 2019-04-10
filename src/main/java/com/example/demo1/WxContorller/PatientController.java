@@ -1,15 +1,14 @@
 package com.example.demo1.WxContorller;
 
-import com.example.demo1.bean.Patient;
-import com.example.demo1.bean.Report;
-import com.example.demo1.bean.User;
-import com.example.demo1.bean.Userimage;
+import com.example.demo1.bean.*;
+import com.example.demo1.service.OrderService;
 import com.example.demo1.service.PatientService;
 import com.example.demo1.service.ReportService;
 import com.example.demo1.service.UserService;
 import com.example.demo1.util.Constant;
 import com.example.demo1.util.MsgBuilder;
 import org.apache.commons.lang3.StringUtils;
+import org.jdom.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +26,8 @@ public class PatientController {
     UserService userService;
     @Autowired
     ReportService reportService;
+    @Autowired
+    OrderService orderService;
     /**
      * 就诊人管理列表
      * @param httpServletRequest
@@ -235,5 +236,27 @@ public class PatientController {
             return MsgBuilder.buildReturnErrorMessage("删除失败");
         }
         return MsgBuilder.buildReturnMessage("删除成功");
+    }
+
+    /**
+     * 添加订单
+     * @param order
+     * @param
+     * @return
+     */
+    @RequestMapping("/addorder")
+    public Map addorder(Order order,String id,HttpServletRequest request)throws JDOMException {
+       return orderService.addorder(order,id,request);
+    }
+
+    /**
+     * 修改订单状态
+     * @param id
+     * @return
+     */
+    @RequestMapping("/updateOrder")
+    public Map updateOrder(String id){
+        orderService.updateorder(Integer.parseInt(id));
+        return MsgBuilder.buildReturnMessage("成功");
     }
 }

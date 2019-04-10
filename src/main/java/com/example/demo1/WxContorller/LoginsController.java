@@ -10,6 +10,7 @@ import com.example.demo1.util.Constant;
 import com.example.demo1.util.MsgBuilder;
 import com.example.demo1.util.Token;
 import com.example.demo1.util.Wechat2;
+import com.ksyun.ks3.sdk.dto.internal.Request;
 import com.ksyun.ks3.utils.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class LoginsController {
     @RequestMapping("/wechatlogin")
     public void wechatlogin(HttpServletRequest request, HttpServletResponse response) {
         StringBuffer  ctxPath =new StringBuffer(request.getScheme() + "://" + request.getServerName() + request.getContextPath());
-        ctxPath.append("/hospital/wx/code");
+        ctxPath.append("/wx/code");
         String url =Wechat2.getAuthorityUrl(ctxPath.toString(), "STATE", "snsapi_base");
         try {
             response.sendRedirect(url);
@@ -49,18 +50,18 @@ public class LoginsController {
     }
 
     @RequestMapping("/code")
-    public Map code(String code){
+    public Map code(String code ,HttpServletResponse response) throws IOException {
         Map<String, Object> result = new HashMap<>();
         int type;
-        /*JSONObject json =Wechat2.getReturmParam(Wechat2.getTokenAndOpenidUrl(code));
+        JSONObject json =Wechat2.getReturmParam(Wechat2.getTokenAndOpenidUrl(code));
         String openid="";
         try{
             openid = json.getString("openid");
         }catch(Exception e){
             //失败
             return MsgBuilder.buildReturnErrorMessage("解析异常");
-        }*/
-        String openid=code;
+        }
+      //  String openid=code;
         User user=userService.findbyopenid(openid);
         Map tokenMap = new HashMap(1);
         if (user!=null){
@@ -93,7 +94,7 @@ public class LoginsController {
         if (Constant.GENERATE_TOKEN_ERROR.equals(tokenStr)) {
             return MsgBuilder.buildReturnErrorMessage("token生成异常，请稍候重试！");
         }
-//        response.sendRedirect("http://jp.starint.cn/#/binding?token="+tokenStr+"&type="+type);
+        response.sendRedirect("http://jp.starint.cn/#/binding?token="+tokenStr+"&type="+type);
 
         result.put("token", tokenStr);
         result.put("type",type);

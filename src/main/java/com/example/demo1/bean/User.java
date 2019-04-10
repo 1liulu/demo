@@ -21,7 +21,6 @@ public class User {
     private Date creation_time;
     private String name;
     private int classify;
-
     public int getClassify() {
         return classify;
     }

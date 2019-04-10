@@ -37,4 +37,18 @@ public interface OrderMapper {
      * @return
      */
     public List<OrderDetails> findbyuid(int id);
+
+    /**
+     * 添加订单
+     * @param order
+     * @return
+     */
+    public int addorder(Order order);
+
+    /**
+     * 修改订单状态
+     * @param id
+     * @return
+     */
+    int updateorder(int id);
 }

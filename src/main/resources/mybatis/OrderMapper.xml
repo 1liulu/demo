@@ -32,12 +32,14 @@
 			FROM y_order
 			INNER JOIN y_user ON(y_order.uid=y_user.id)
 			INNER JOIN y_user u1 ON(y_order.did=u1.id)
+			INNER JOIN y_patient  ON(y_patient.uid=y_user.cardnum)
 			LEFT  JOIN y_report ON(y_report.id=y_order.film_num)
 			LEFT JOIN y_consultation_report ON(y_consultation_report.oid=y_order.id)
 			WHERE y_order.uid IN (SELECT id FROM y_user
 			WHERE (id=#{0} OR pid=#{0}) and status=1)
 			AND  y_order.`status`=1
 			AND is_pay=1
+		ORDER BY y_order.createtime DESC
 	</select>
     <sql id="userColumns">
 			y_order.id AS "order.id",
@@ -60,7 +62,7 @@
 			y_user.type AS "u_user.type",
 			y_user.pid AS "u_user.pid",
 			y_user.creation_time AS "u_user.creation_time",
-			y_user.`name` AS "u_user.`name`",
+			y_patient.`name` AS "u_user.name",
 			y_user.classify AS "u_user.classify",
 			u1.id AS "d_user.id",
 			u1.cardnum AS "d_user.cardnum",
@@ -71,7 +73,7 @@
 			u1.type AS "d_user.type",
 			u1.pid AS "d_user.pid",
 			u1.creation_time AS "d_user.creation_time",
-			u1.`name` AS "d_user.`name`",
+			u1.`name` AS "d_user.name",
 			u1.classify AS "d_user.classify",
 			y_report.id AS "report.id",
 			y_report.items AS "report.items",
@@ -101,4 +103,15 @@
 			y_consultation_report.post_title AS "consultationReport.post_title",
 			y_consultation_report.post_content AS "consultationReport.post_content"
 	</sql>
+	<insert id="addorder" parameterType="com.example.demo1.bean.Order">
+		<selectKey resultType="int" keyProperty="id" order="AFTER" >
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	INSERT INTO y_order(uid,did,order_num,is_pay,status,price,createtime,film_num,pay_time,is_handle)
+	VALUE(#{uid},#{did},#{order_num},#{is_pay},#{status},#{price},#{createtime},#{film_num},#{pay_time},#{is_handle})
+	</insert>
+	<update id="updateorder" parameterType="int">
+		UPDATE y_order SET is_pay=1
+		WHERE id=#{0}
+	</update>
 </mapper>

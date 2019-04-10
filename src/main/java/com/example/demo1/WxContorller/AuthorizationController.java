@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +36,7 @@ public class AuthorizationController {
      * @return
      */
     @RequestMapping("/addAuthorization")
-    public Map addAuthorization( String userid,String name, String phone, String date, String reportid){
+    public Map addAuthorization( String userid,String name, String phone, String date, String reportid) throws ParseException {
         if (StringUtils.isBlank(phone)) {
             return MsgBuilder.buildReturnErrorMessage("请输入手机号");
         }
@@ -58,11 +60,16 @@ public class AuthorizationController {
         Dshouquan dshouquan=new Dshouquan();
         dshouquan.setStarttime(new Date());
         dshouquan.setStatus(Constant.STATUS_VALID);
-        dshouquan.setUid(Integer.parseInt(userid));
         dshouquan.setRid(Integer.parseInt(reportid));
         dshouquan.setTo_who(user.getId());
         dshouquan.setEndtime(new Date());
-        dshouquanService.addshouquan(dshouquan);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm");
+        Date time = sdf.parse(date);
+        dshouquan.setEndtime(time);
+        int i=dshouquanService.addshouquan(dshouquan,userid);
+        if(i==0){
+            return MsgBuilder.buildReturnErrorMessage("授权失败");
+        }
         return MsgBuilder.buildReturnMessage("授权成功");
     }
 
